@@ -6,8 +6,6 @@ daemon
 notifications
 out
 
-echo ".idea" > .gitignore
-
 
 # Ignore Gradle GUI config
 gradle-app.setting
