@@ -2,8 +2,8 @@
 build
 caches
 daemon
-gradle
 .idea
+notifications
 
 echo ".idea" > .gitignore
 
