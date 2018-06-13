@@ -4,6 +4,7 @@ caches
 daemon
 .idea
 notifications
+out
 
 echo ".idea" > .gitignore
 
