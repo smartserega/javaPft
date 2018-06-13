@@ -8,7 +8,7 @@ import java.awt.*;
 public class PointMainTests {
 
     @Test
-    public void testArea () {
+    public void PointMainTests () {
         Point p1 = new Point();
         Point p2 = new Point();
         p1.distance(p1, p2);
