@@ -11,7 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.*;
 import ru.stqa.addressbook.model.GroupData;
 
-public class GroupCreationTests extends TestBase{
+public class GroupCreationTests extends TestBase {
     FirefoxDriver wd;
 
     @Test
