@@ -24,7 +24,6 @@ public class ContactsHelper extends HelperBase {
         type("address", contactsData.getTest_address());
         type("mobile", contactsData.getMobile());
         type("email", contactsData.getEmail());
-
     }
 
     public void initAddNewContact() {
