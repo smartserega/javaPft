@@ -1,0 +1,17 @@
+package ru.stqa.addressbook.tests;
+
+import org.testng.annotations.Test;
+import ru.stqa.addressbook.model.ContactsData;
+
+public class ContactsModificationTests extends TestBase {
+
+    @Test
+    public void contactsModificationTests (){
+        app.getNavigationHelper().gotoContactPage();
+        app.getGroupHelper().selectContact();
+        app.getGroupHelper().editContact();
+        app.getContactsHelper().fillContactData(new ContactsData("Test First name-1", "Test Middle name-2", "Test Last Name", "Test Nickname", "Test Title", "Test Compane", "Test Address", "+749511111111", "+790511111111", "E-mail@E-mail.ru"));
+        app.getGroupHelper().submitContactModification();
+        app.getGroupHelper().returntoContactPage();
+    }
+}
