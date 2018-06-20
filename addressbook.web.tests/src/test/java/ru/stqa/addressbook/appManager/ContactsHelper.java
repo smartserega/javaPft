@@ -29,6 +29,10 @@ public class ContactsHelper extends HelperBase {
     public void initAddNewContact() {
         click(By.linkText("add new"));
     }
+
+    public void deleteContact() {
+        click(By.xpath(".//div[@id='content']/form[2]/input[2]"));
+    }
 }
 
 
