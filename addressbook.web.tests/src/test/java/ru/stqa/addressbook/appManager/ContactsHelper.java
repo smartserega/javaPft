@@ -15,15 +15,15 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void fillContactData(ContactsData contactsData) {
-        type("firstname", contactsData.getTest_first_name());
-        type("middlename", contactsData.getTest_middle_name());
-        type("lastname", contactsData.getTest_last_name());
-        type("nickname", contactsData.getTest_nickname());
-        type("title", contactsData.getTest_title());
-        type("company", contactsData.getTest_compane());
-        type("address", contactsData.getTest_address());
-        type("mobile", contactsData.getMobile());
-        type("email", contactsData.getEmail());
+        type(By.name("firstname"), contactsData.getTest_first_name());
+        type(By.name("middlename"), contactsData.getTest_middle_name());
+        type(By.name("lastname"), contactsData.getTest_last_name());
+        type(By.name("nickname"), contactsData.getTest_nickname());
+        type(By.name("title"), contactsData.getTest_title());
+        type(By.name("company"), contactsData.getTest_compane());
+        type(By.name("address"), contactsData.getTest_address());
+        type(By.name("mobile"), contactsData.getMobile());
+        type(By.name("email"), contactsData.getEmail());
     }
 
     public void initAddNewContact() {

@@ -15,11 +15,14 @@ public class HelperBase {
         wd.findElement(locator).click();
     }
 
-    protected void type(String locator, String text) {
-        click(By.name(locator));
+    protected void type(By locator, String text) {
+        click(locator);
         if (text != null) {
-            wd.findElement(By.name(locator)).clear();
-            wd.findElement(By.name(locator)).sendKeys(text);
+            String existingText = wd.findElement(locator).getAttribute("value");
+            if (! text.equals(existingText)) {
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
         }
     }
 
