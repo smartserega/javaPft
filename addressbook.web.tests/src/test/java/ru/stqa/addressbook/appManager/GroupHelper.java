@@ -32,8 +32,8 @@ public class GroupHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void selectGroup() {
-        click(By.name("selected[]"));
+    public void selectGroup(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void initGroupModification() {
@@ -42,22 +42,6 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
-    }
-
-    public void selectContact() {
-        click(By.xpath(".//html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
-    }
-
-    public void editContact() {
-        click(By.xpath(".//*[@id=\"maintable\"]/tbody/tr[2]/td[8]"));
-    }
-
-    public void submitContactModification() {
-        click(By.name("update"));
-    }
-
-    public void returntoContactPage() {
-        click(By.linkText("home"));
     }
 
     public void createGroup(GroupData group) {

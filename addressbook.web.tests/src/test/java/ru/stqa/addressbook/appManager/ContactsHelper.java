@@ -56,6 +56,22 @@ public class ContactsHelper extends HelperBase {
     public int getContactsCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
+
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+    }
+
+    public void editContact() {
+        click(By.xpath(".//*[@id=\"maintable\"]/tbody/tr[2]/td[8]"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void returntoContactPage() {
+        click(By.linkText("home"));
+    }
 }
 
 
