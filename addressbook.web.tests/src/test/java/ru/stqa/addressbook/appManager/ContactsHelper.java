@@ -1,11 +1,14 @@
 package ru.stqa.addressbook.appManager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactsData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsHelper extends HelperBase {
 
@@ -72,7 +75,20 @@ public class ContactsHelper extends HelperBase {
     public void returntoContactPage() {
         click(By.linkText("home"));
     }
+
+
+    public List<ContactsData> getContactList() {
+        List<ContactsData> contacts = new ArrayList<ContactsData>();
+        List<WebElement> elements = wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr"));
+        for (WebElement element: elements){
+            String name = element.getText();
+            ContactsData contact = new ContactsData(name, "Test Middle name", "Test Last Name", "Test Nickname", "Test Title", "Test Compane", "Test Address", "+749511111111", "+790511111111", "E-mail@E-mail.ru", "Test1");
+            contacts.add(contact);
+        }
+        return contacts;
+    }
 }
+
 
 
 
