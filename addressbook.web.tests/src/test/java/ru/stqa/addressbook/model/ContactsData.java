@@ -1,5 +1,7 @@
 package ru.stqa.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactsData {
     private final String test_first_name;
     private final String test_middle_name;
@@ -25,6 +27,30 @@ public class ContactsData {
         this.mobile = mobile;
         this.email = email;
         this.group = group;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactsData that = (ContactsData) o;
+        return Objects.equals(test_first_name, that.test_first_name) &&
+                Objects.equals(test_middle_name, that.test_middle_name) &&
+                Objects.equals(test_last_name, that.test_last_name);
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactsData{" +
+                "test_first_name='" + test_first_name + '\'' +
+                ", test_middle_name='" + test_middle_name + '\'' +
+                ", test_last_name='" + test_last_name + '\'' +
+                '}';
     }
 
     public String getTest_first_name() {
