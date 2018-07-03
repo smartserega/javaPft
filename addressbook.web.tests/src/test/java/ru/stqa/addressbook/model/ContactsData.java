@@ -23,14 +23,12 @@ public class ContactsData {
         ContactsData that = (ContactsData) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(test_first_name, that.test_first_name) &&
-                Objects.equals(test_middle_name, that.test_middle_name) &&
-                Objects.equals(test_last_name, that.test_last_name);
+                Objects.equals(test_middle_name, that.test_middle_name);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, test_first_name, test_middle_name, test_last_name);
+        return 0;
     }
 
     @Override
@@ -39,7 +37,6 @@ public class ContactsData {
                 "id='" + id + '\'' +
                 ", test_first_name='" + test_first_name + '\'' +
                 ", test_middle_name='" + test_middle_name + '\'' +
-                ", test_last_name='" + test_last_name + '\'' +
                 '}';
     }
 
