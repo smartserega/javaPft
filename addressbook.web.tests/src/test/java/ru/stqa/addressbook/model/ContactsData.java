@@ -33,6 +33,21 @@ public class ContactsData {
         return id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactsData that = (ContactsData) o;
+        return Objects.equals(test_first_name, that.test_first_name) &&
+                Objects.equals(test_last_name, that.test_last_name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(test_first_name, test_last_name);
+    }
+
     public ContactsData(int id, String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
         this.id = id;
         this.test_first_name = test_first_name;
@@ -43,6 +58,7 @@ public class ContactsData {
         this.test_compane = test_compane;
         this.test_address = test_address;
         this.homePhone = homePhone;
+
         this.mobile = mobile;
         this.email = email;
         this.group = group;
@@ -87,22 +103,6 @@ public class ContactsData {
 
     public String getTest_compane() {
         return test_compane;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactsData that = (ContactsData) o;
-        return id == that.id &&
-                Objects.equals(test_first_name, that.test_first_name) &&
-                Objects.equals(test_last_name, that.test_last_name);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, test_first_name, test_last_name);
     }
 
     public String getTest_address() {
