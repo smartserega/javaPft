@@ -3,7 +3,11 @@ package ru.stqa.addressbook.model;
 import java.util.Objects;
 
 public class ContactsData {
-    private final String id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private final String test_first_name;
     private final String test_middle_name;
     private final String test_last_name;
@@ -17,22 +21,6 @@ public class ContactsData {
     private String group;
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactsData that = (ContactsData) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(test_first_name, that.test_first_name) &&
-                Objects.equals(test_last_name, that.test_last_name);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, test_first_name, test_last_name);
-    }
-
-    @Override
     public String toString() {
         return "ContactsData{" +
                 "id='" + id + '\'' +
@@ -41,11 +29,11 @@ public class ContactsData {
                 '}';
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public ContactsData(String id, String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
+    public ContactsData(int id, String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
         this.id = id;
         this.test_first_name = test_first_name;
         this.test_middle_name = test_middle_name;
@@ -62,7 +50,7 @@ public class ContactsData {
 
 
     public ContactsData(String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
-        this.id = null;
+        this.id = Integer.MAX_VALUE;
         this.test_first_name = test_first_name;
         this.test_middle_name = test_middle_name;
         this.test_last_name = test_last_name;
@@ -99,6 +87,22 @@ public class ContactsData {
 
     public String getTest_compane() {
         return test_compane;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactsData that = (ContactsData) o;
+        return id == that.id &&
+                Objects.equals(test_first_name, that.test_first_name) &&
+                Objects.equals(test_last_name, that.test_last_name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, test_first_name, test_last_name);
     }
 
     public String getTest_address() {
