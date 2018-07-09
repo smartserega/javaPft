@@ -13,7 +13,7 @@ public class GroupDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondtions() {
         app.goTo().groupPage();
-        if (app.group().list().size() ==0) {
+        if (app.group().list().size() == 0) {
             app.group().create(new GroupData().withName("Test1"));
         }
     }
@@ -35,7 +35,6 @@ public class GroupDeletionTests extends TestBase {
         Assert.assertEquals(before, after);
 
     }
-
 
 
 }

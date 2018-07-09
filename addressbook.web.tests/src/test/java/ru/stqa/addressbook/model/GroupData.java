@@ -9,8 +9,6 @@ public class GroupData {
     private int id = Integer.MAX_VALUE;
 
 
-
-
     public int getId() {
         return id;
     }
@@ -43,7 +41,7 @@ public class GroupData {
 
     public GroupData withId(int id) {
         this.id = id;
-        return  this;
+        return this;
     }
 
     public GroupData withHeader(String header) {
@@ -55,7 +53,6 @@ public class GroupData {
         this.header = footer;
         return this;
     }
-
 
 
     @Override

@@ -46,8 +46,9 @@ public class ContactsData {
         return Objects.hash(test_first_name, test_last_name);
     }
 
-    public void withId(int id) {
+    public ContactsData withId(int id) {
         this.id = id;
+        return this;
     }
 
     public ContactsData withFirstName(String test_first_name) {
