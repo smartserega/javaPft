@@ -15,7 +15,8 @@ public class ContactsModificationTests extends TestBase {
         app.goTo().contactPage();
 
         if (!app.contacts().isThereAContact()) {
-            app.contacts().create(new ContactsData("Test First name", "Test Middle name", "Test Last Name", "Test Nickname", "Test Title", "Test Compane", "Test Address", "+749511111111", "+790511111111", "E-mail@E-mail.ru", "Test1"));
+            app.contacts().create(new ContactsData().withFirstName("Test First name-2").withMiddleName("Test Middle name")
+                    .withLastName("Test Last Name").withNickname("Test Nickname").withTitle("Test Title").withCompane("Test Compane").withGroup("Test"));
         }
     }
 
@@ -24,7 +25,10 @@ public class ContactsModificationTests extends TestBase {
         app.goTo().contactPage();
         List<ContactsData> before = app.contacts().list();
         int index = before.size() - 1;
-        ContactsData contacts = new ContactsData(before.get(index).getId(), "Test First name-5", "Test Middle name", "Test Last name-4", "Test Nickname", "Test Title", "Test Compane", "Test Address", "+749511111111", "+790511111111", "E-mail@E-mail.ru", null);
+        ContactsData contacts = new ContactsData().withId(before.get(index).getId()).withFirstName("Test First name-2").withTestMiddleName("Test Middle name")
+                .withLastName("Test Last Name").withNickname("Test Nickname").withTitle("Test Title").withCompane("Test Compane").withGroup("Test");
+
+
         app.contacts().modifyContact(index, contacts);
         List<ContactsData> after = app.contacts().list();
         Assert.assertEquals(after.size(), before.size());
@@ -36,8 +40,6 @@ public class ContactsModificationTests extends TestBase {
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before, after);
-
-
     }
 
 

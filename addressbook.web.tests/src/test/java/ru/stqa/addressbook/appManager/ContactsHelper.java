@@ -102,6 +102,7 @@ public class ContactsHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             ContactsData contact = new ContactsData(id, firstName, "Test Middle name", lastName,  "Test Nickname", "Test Title", "Test Compane", "Test Address", "+749511111111", "+790511111111", "E-mail@E-mail.ru", "Test1");
             contacts.add(contact);
+
         }
         return contacts;
     }

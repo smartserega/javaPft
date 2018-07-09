@@ -3,21 +3,19 @@ package ru.stqa.addressbook.model;
 import java.util.Objects;
 
 public class ContactsData {
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    private int id;
-    private final String test_first_name;
-    private final String test_middle_name;
-    private final String test_last_name;
-    private final String test_nickname;
-    private final String test_title;
-    private final String test_compane;
-    private final String test_address;
-    private final String homePhone;
-    private final String mobile;
-    private final String email;
+
+    private int id = Integer.MAX_VALUE;
+    private String test_first_name;
+    private String test_middle_name;
+    private String test_last_name;
+    private String test_nickname;
+    private String test_title;
+    private String test_compane;
+    private String test_address;
+    private String homePhone;
+    private String mobile;
+    private String email;
     private String group;
 
     @Override
@@ -48,36 +46,63 @@ public class ContactsData {
         return Objects.hash(test_first_name, test_last_name);
     }
 
-    public ContactsData(int id, String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
+    public void withId(int id) {
         this.id = id;
-        this.test_first_name = test_first_name;
-        this.test_middle_name = test_middle_name;
-        this.test_last_name = test_last_name;
-        this.test_nickname = test_nickname;
-        this.test_title = test_title;
-        this.test_compane = test_compane;
-        this.test_address = test_address;
-        this.homePhone = homePhone;
-
-        this.mobile = mobile;
-        this.email = email;
-        this.group = group;
     }
 
-
-    public ContactsData(String test_first_name, String test_middle_name, String test_last_name, String test_nickname, String test_title, String test_compane, String test_address, String homePhone, String mobile, String email, String group) {
-        this.id = Integer.MAX_VALUE;
+    public ContactsData withFirstName(String test_first_name) {
         this.test_first_name = test_first_name;
+        return this;
+    }
+
+    public ContactsData withMiddleName(String test_middle_name) {
         this.test_middle_name = test_middle_name;
+        return this;
+    }
+
+    public ContactsData withLastName(String test_last_name) {
         this.test_last_name = test_last_name;
+        return this;
+    }
+
+    public ContactsData withNickname(String test_nickname) {
         this.test_nickname = test_nickname;
+        return this;
+    }
+
+    public ContactsData withTitle(String test_title) {
         this.test_title = test_title;
+        return this;
+    }
+
+    public ContactsData withCompane(String test_compane) {
         this.test_compane = test_compane;
+        return this;
+    }
+
+    public ContactsData withAddress(String test_address) {
         this.test_address = test_address;
+        return this;
+    }
+
+    public ContactsData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactsData withMobile(String mobile) {
         this.mobile = mobile;
+        return this;
+    }
+
+    public ContactsData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public ContactsData withGroup(String group) {
         this.group = group;
+        return this;
     }
 
 
