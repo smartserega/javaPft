@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.addressbook.model.ContactsData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactsHelper extends HelperBase {
 
@@ -108,6 +110,25 @@ public class ContactsHelper extends HelperBase {
         }
         return contacts;
     }
+
+
+    public Set<ContactsData> all() {
+        Set<ContactsData> contacts = new HashSet<>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
+        for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String firstName = cells.get(2).getText();
+            String lastName = cells.get(1).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
+            contacts.add(new ContactsData().withId(id).withFirstName(firstName).withMiddleName("MiddleName").
+                    withLastName(lastName).withNickname("nickname").withTitle("Title").withCompane("company").
+                    withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
+                    withGroup("Test1"));
+
+        }
+        return contacts;
+    }
+
 }
 
 
