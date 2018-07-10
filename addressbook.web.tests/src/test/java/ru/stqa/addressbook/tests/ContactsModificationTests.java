@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 

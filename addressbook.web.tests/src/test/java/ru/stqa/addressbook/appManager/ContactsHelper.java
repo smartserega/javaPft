@@ -53,12 +53,14 @@ public class ContactsHelper extends HelperBase {
         initAddNewContact();
         fillContactData(contact, true);
         initContactCreation();
+        groupCashe = null;
     }
 
     public void modifyContact(ContactsData contacts) {
         editContactByid(contacts.getId());
         fillContactData(contacts, false);
         submitContactModification();
+        groupCashe = null;
         returntoContactPage();
     }
 
@@ -88,25 +90,28 @@ public class ContactsHelper extends HelperBase {
     public void delete(ContactsData contact) {
         selectContactById(contact.getId());
         deleteContact();
+        groupCashe = null;
         returntoContactPage();
     }
 
 
+    private Contacts groupCashe = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        groupCashe = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String firstName = cells.get(2).getText();
             String lastName = cells.get(1).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new ContactsData().withId(id).withFirstName(firstName).withMiddleName("MiddleName").
+            groupCashe.add(new ContactsData().withId(id).withFirstName(firstName).withMiddleName("MiddleName").
                     withLastName(lastName).withNickname("nickname").withTitle("Title").withCompane("company").
                     withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
                     withGroup("Test1"));
 
         }
-        return contacts;
+        return new Contacts(groupCashe);
     }
 
 
