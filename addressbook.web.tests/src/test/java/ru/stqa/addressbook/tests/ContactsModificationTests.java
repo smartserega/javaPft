@@ -3,9 +3,13 @@ package ru.stqa.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactsModificationTests extends TestBase {
 
@@ -21,7 +25,7 @@ public class ContactsModificationTests extends TestBase {
     @Test
     public void contactsModificationTests() {
         app.goTo().contactPage();
-        Set<ContactsData> before = app.contacts().all();
+        Contacts before = app.contacts().all();
         ContactsData modifiedContact = before.iterator().next();
         ContactsData contacts = new ContactsData().withId(modifiedContact.getId()).withFirstName("FirstName").withMiddleName("MiddleName").
                 withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
@@ -30,13 +34,10 @@ public class ContactsModificationTests extends TestBase {
 
 
         app.contacts().modifyContact(contacts);
-        Set<ContactsData> after = app.contacts().all();
+        Contacts after = app.contacts().all();
+
         Assert.assertEquals(after.size(), before.size());
-
-
-        before.remove(modifiedContact);
-        before.add(contacts);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.withOutAdded(modifiedContact).withAdded(contacts)));
     }
 
 
