@@ -84,7 +84,7 @@ public class ContactsHelper extends HelperBase {
 //    }
 
     private void editContactByid(int id) {
-        wd.findElement(By.cssSelector("a[href= edit.php?id='" + id + "']")).click();
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
 
