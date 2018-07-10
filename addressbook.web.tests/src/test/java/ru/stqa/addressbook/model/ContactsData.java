@@ -18,6 +18,7 @@ public class ContactsData {
     private String group;
     private String work_phone;
 
+
     @Override
     public String toString() {
         return "ContactsData{" +
@@ -119,6 +120,9 @@ public class ContactsData {
 
 
 
+
+
+
     public String getTest_middle_name() {
         return test_middle_name;
     }
@@ -139,7 +143,7 @@ public class ContactsData {
         return test_compane;
     }
 
-    public String getTest_address() {
+    public String getAddress() {
         return test_address;
     }
 

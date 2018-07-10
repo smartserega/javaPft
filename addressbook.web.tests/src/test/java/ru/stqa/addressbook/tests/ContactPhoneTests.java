@@ -16,10 +16,12 @@ public class ContactPhoneTests extends TestBase {
         assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
         assertThat(contact.getMobile(), equalTo(cleaned(contactInfoFromEditForm.getMobile())));
         assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
+        assertThat(contact.getEmail(), equalTo(contactInfoFromEditForm.getEmail()));
+        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
     }
 
 
-        public String cleaned(String phone){
-            return phone.replaceAll("\\s","" ).replaceAll("[-()]","");
-        }
+    public String cleaned(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
 }
