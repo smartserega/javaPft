@@ -55,7 +55,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void modifyContact(ContactsData contacts) {
-        editContactByid(contacts);
+        editContactByid(contacts.getId());
         fillContactData(contacts, false);
         submitContactModification();
         returntoContactPage();
@@ -71,19 +71,19 @@ public class ContactsHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
+//    public void selectContact(int index) {
+//        wd.findElements(By.name("selected[]")).get(index).click();
+//    }
 
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void editContact(int index) {
-        wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr[*]/td[8]/a/img")).get(index).click();
-    }
+//    public void editContact(int index) {
+//        wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr[*]/td[8]/a/img")).get(index).click();
+//    }
 
-    private void editContactByid(ContactsData id) {
+    private void editContactByid(int id) {
         wd.findElement(By.cssSelector("a[href= edit.php?id='" + id + "']")).click();
     }
 

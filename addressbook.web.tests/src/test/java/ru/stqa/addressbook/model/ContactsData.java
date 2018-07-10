@@ -4,22 +4,6 @@ import java.util.Objects;
 
 public class ContactsData {
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactsData that = (ContactsData) o;
-        return id == that.id &&
-                Objects.equals(test_first_name, that.test_first_name) &&
-                Objects.equals(test_last_name, that.test_last_name);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, test_first_name, test_last_name);
-    }
-
     private int id = Integer.MAX_VALUE;
     private String test_first_name;
     private String test_middle_name;
@@ -40,6 +24,22 @@ public class ContactsData {
                 ", test_first_name='" + test_first_name + '\'' +
                 ", test_last_name='" + test_last_name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactsData that = (ContactsData) o;
+        return id == that.id &&
+                Objects.equals(test_first_name, that.test_first_name) &&
+                Objects.equals(test_last_name, that.test_last_name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, test_first_name, test_last_name);
     }
 
     public int getId() {
