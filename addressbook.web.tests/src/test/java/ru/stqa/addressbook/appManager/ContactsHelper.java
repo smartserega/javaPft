@@ -104,10 +104,11 @@ public class ContactsHelper extends HelperBase {
             String firstName = cells.get(2).getText();
             String address = cells.get(3).getText();
             String email = cells.get(4).getText();
-            String[] phones = cells.get(5).getText().split("\n");
+            String allPhones = cells.get(5).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            groupCashe.add(new ContactsData().withId(id).withFirstName(firstName).withLastName(lastName).withHomePhone(phones[0]).
-                    withMobile(phones[1]).withWorkPhone(phones[2]).withEmail(email).withAddress(address));
+
+            groupCashe.add(new ContactsData().withId(id).withFirstName(firstName).withLastName(lastName).
+                    withAllPhones(allPhones).withEmail(email).withAddress(address));
 
         }
         return new Contacts(groupCashe);

@@ -18,6 +18,17 @@ public class ContactsData {
     private String group;
     private String work_phone;
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactsData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
+
 
     @Override
     public String toString() {
