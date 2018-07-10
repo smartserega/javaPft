@@ -62,32 +62,18 @@ public class ContactsHelper extends HelperBase {
     }
 
 
-
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public int getContactsCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-//    public void selectContact(int index) {
-//        wd.findElements(By.name("selected[]")).get(index).click();
-//    }
 
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-//    public void editContact(int index) {
-//        wd.findElements(By.xpath(".//*[@id='maintable']/tbody/tr[*]/td[8]/a/img")).get(index).click();
-//    }
-
     private void editContactByid(int id) {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
-
-
 
 
     public void submitContactModification() {
