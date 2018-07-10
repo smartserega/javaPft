@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactsHelper extends HelperBase {
 
@@ -104,17 +102,28 @@ public class ContactsHelper extends HelperBase {
             List<WebElement> cells = element.findElements(By.tagName("td"));
             String firstName = cells.get(2).getText();
             String lastName = cells.get(1).getText();
+            String[] phones = cells.get(5).getText().split("\n");
+
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            groupCashe.add(new ContactsData().withId(id).withFirstName(firstName).withMiddleName("MiddleName").
-                    withLastName(lastName).withNickname("nickname").withTitle("Title").withCompane("company").
-                    withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
-                    withGroup("Test1"));
+
+            groupCashe.add(new ContactsData().withId(id).withFirstName(firstName).withHomePhone(phones[0]).
+                    withMobile(phones[1]).withWorkPhone(phones[2]));
 
         }
         return new Contacts(groupCashe);
     }
 
-
+    public ContactsData InfoFromEditForm(ContactsData contact) {
+        editContactByid(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactsData().withId(contact.getId()).withFirstName(firstname).
+                withLastName(lastname).withHomePhone(home).withMobile(mobile).withWorkPhone(work);
+    }
 }
 
 

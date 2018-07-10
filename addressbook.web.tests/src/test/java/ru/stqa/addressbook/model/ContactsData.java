@@ -16,6 +16,7 @@ public class ContactsData {
     private String mobile;
     private String email;
     private String group;
+    private String work_phone;
 
     @Override
     public String toString() {
@@ -53,6 +54,11 @@ public class ContactsData {
 
     public ContactsData withFirstName(String test_first_name) {
         this.test_first_name = test_first_name;
+        return this;
+    }
+
+    public ContactsData withWorkPhone(String work_phone) {
+        this.work_phone = work_phone;
         return this;
     }
 
@@ -111,6 +117,8 @@ public class ContactsData {
         return test_first_name;
     }
 
+
+
     public String getTest_middle_name() {
         return test_middle_name;
     }
@@ -137,6 +145,10 @@ public class ContactsData {
 
     public String getHomePhone() {
         return homePhone;
+    }
+
+    public String getWorkPhone() {
+        return work_phone;
     }
 
     public String getMobile() {
