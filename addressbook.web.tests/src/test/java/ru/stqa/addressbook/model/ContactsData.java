@@ -14,9 +14,48 @@ public class ContactsData {
     private String test_address;
     private String homePhone;
     private String mobile;
-    private String email;
+    private String email1;
+    private String email2;
+    private String email3;
     private String group;
     private String work_phone;
+    private String allPhones;
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactsData withEmail1(String email1) {
+        this.email1 = email1;
+        return this;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactsData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactsData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactsData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    private String allEmails;
+
+
 
     public String getAllPhones() {
         return allPhones;
@@ -27,7 +66,7 @@ public class ContactsData {
         return this;
     }
 
-    private String allPhones;
+
 
 
     @Override
@@ -115,7 +154,7 @@ public class ContactsData {
     }
 
     public ContactsData withEmail(String email) {
-        this.email = email;
+        this.email1 = email;
         return this;
     }
 
@@ -170,8 +209,8 @@ public class ContactsData {
         return mobile;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmail1() {
+        return email1;
     }
 
     public String getGroup() {
