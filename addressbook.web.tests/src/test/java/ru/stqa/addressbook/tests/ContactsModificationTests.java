@@ -21,6 +21,7 @@ public class ContactsModificationTests extends TestBase {
         }
     }
 
+
     @Test
     public void contactsModificationTests() {
         app.goTo().contactPage();
