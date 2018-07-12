@@ -8,7 +8,6 @@ public class GroupData {
     private String footer;
     private int id = Integer.MAX_VALUE;
 
-
     public int getId() {
         return id;
     }
@@ -26,14 +25,6 @@ public class GroupData {
         return footer;
     }
 
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
-
     public GroupData withName(String name) {
         this.name = name;
         return this;
@@ -43,6 +34,19 @@ public class GroupData {
         this.id = id;
         return this;
     }
+
+
+    public GroupData withHeader(String header) {
+        this.header = header;
+        return this;
+    }
+
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -59,16 +63,11 @@ public class GroupData {
         return Objects.hash(name, id);
     }
 
-    public GroupData withHeader(String header) {
-        this.header = header;
-        return this;
-
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
-
-    public GroupData withFooter(String footer) {
-        this.header = footer;
-        return this;
-    }
-
-
 }
