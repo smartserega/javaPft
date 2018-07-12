@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 
+import java.io.File;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -15,10 +16,11 @@ public class ContactsCreationTests extends TestBase {
     public void testContactsCreationTests() {
         app.goTo().contactPage();
         Contacts before = app.contacts().all();
+        File photo = new File("src/test/resources/photo.png");
         ContactsData contacts = new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
                 withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
                 withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
-                withGroup("Test1");
+                withGroup("Test1").withPhoto(photo);
 
         app.contacts().create(contacts);
         app.goTo().contactPage();
@@ -29,7 +31,7 @@ public class ContactsCreationTests extends TestBase {
 
     }
 
-    @Test
+    @Test (enabled = false)
     public void testContactsCreationBadTests() {
         app.goTo().contactPage();
         Contacts before = app.contacts().all();
