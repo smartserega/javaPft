@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,23 +18,33 @@ public class ContactsCreationTests extends TestBase {
 
 
     @DataProvider
-    public Iterator<Object[]> validContacts() {
-        List<Object[]> list = new ArrayList<Object[]>();
-        File photo = new File("src/test/resources/photo.png");
-        list.add(new Object[]{new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
-                withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
-                withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
-                withGroup("Test1").withPhoto(photo)});
-        list.add(new Object[]{new ContactsData().withFirstName("FirstName-2").withMiddleName("MiddleName-2").
-                withLastName("LastName-2").withNickname("nickname-2").withTitle("Title-2").withCompane("company-2").
-                withAddress("address-2").withMobile("+79991119990").withHomePhone("+79991119990").withEmail("E-mail@E-mail.ru2").
-                withGroup("Test2").withPhoto(photo)});
-        list.add(new Object[]{new ContactsData().withFirstName("FirstName-3").withMiddleName("MiddleName-3").
-                withLastName("LastName-3").withNickname("nickname-3").withTitle("Title-3").withCompane("company-3").
-                withAddress("address-2").withMobile("+79991119990").withHomePhone("+79991119990").withEmail("E-mail@E-mail.ru2").
-                withGroup("Test2").withPhoto(photo)});
-        return list.iterator();
+        public Iterator<Object[]> validContacts() throws IOException {
+            List<Object[]> list = new ArrayList<Object[]>();
+            BufferedReader reader = new BufferedReader(new FileReader(new File("src\\test\\resources\\contacts.csv")));
+            String line = reader.readLine();
+
+            while (line != null) {
+                String [] split = line.split(";");
+                list.add(new Object[] {new ContactsData().withFirstName(split[0]).withLastName(split[1]).withMiddleName(split[2])});
+                line = reader.readLine();
+            }
+            return list.iterator();
     }
+
+//        list.add(new Object[]{new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
+//                withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
+//                withAddress("address").withMobile("+79991119999").withHomePhone("+79991119999").withEmail("E-mail@E-mail.ru").
+//                withGroup("Test1").withPhoto(photo)});
+//        list.add(new Object[]{new ContactsData().withFirstName("FirstName-2").withMiddleName("MiddleName-2").
+//                withLastName("LastName-2").withNickname("nickname-2").withTitle("Title-2").withCompane("company-2").
+//                withAddress("address-2").withMobile("+79991119990").withHomePhone("+79991119990").withEmail("E-mail@E-mail.ru2").
+//                withGroup("Test2").withPhoto(photo)});
+//        list.add(new Object[]{new ContactsData().withFirstName("FirstName-3").withMiddleName("MiddleName-3").
+//                withLastName("LastName-3").withNickname("nickname-3").withTitle("Title-3").withCompane("company-3").
+//                withAddress("address-2").withMobile("+79991119990").withHomePhone("+79991119990").withEmail("E-mail@E-mail.ru2").
+//                withGroup("Test2").withPhoto(photo)});
+
+
 
 
     @Test(dataProvider = "validContacts")
