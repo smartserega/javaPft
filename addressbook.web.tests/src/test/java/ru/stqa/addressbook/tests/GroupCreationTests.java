@@ -22,8 +22,6 @@ public class GroupCreationTests extends TestBase {
         list.add(new Object[]{new GroupData().withName("Test 2").withHeader("Header 2").withFooter("Footer 2")});
         list.add(new Object[]{new GroupData().withName("Test 3").withHeader("Header 3").withFooter("Footer 3")});
         return list.iterator();
-
-
     }
 
     @Test(dataProvider = "validGroups")
