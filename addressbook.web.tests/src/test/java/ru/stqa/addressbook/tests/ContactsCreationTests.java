@@ -24,13 +24,13 @@ public class ContactsCreationTests extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
-        List<Object[]> list = new ArrayList<Object[]>();
+//        List<Object[]> list = new ArrayList<Object[]>();
         BufferedReader reader = new BufferedReader(new FileReader(new File("src\\test\\resources\\contacts.xml")));
         String xml = "";
         String line = reader.readLine();
 
         while (line != null) {
-            list.add(new Object[]{new ContactsData().withGroup("Test1")});
+//            list.add(new Object[]{new ContactsData().withGroup("Test1")});
             xml += line;
             line = reader.readLine();
         }
@@ -46,7 +46,7 @@ public class ContactsCreationTests extends TestBase {
     public void testContactsCreationTests(ContactsData contacts) {
         app.goTo().contactPage();
         Contacts before = app.contacts().all();
-        app.contacts().create(contacts);
+        app.contacts().create(contacts.withGroup("Test1"));
         app.goTo().contactPage();
         Set<ContactsData> after = app.contacts().all();
         assertThat(after.size(), equalTo(before.size() + 1));
