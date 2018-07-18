@@ -44,7 +44,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
         String target = System.getProperty("target", "local");
-        properties.load(new FileReader(new File(String.format("C:\\Users\\sergey.tselin\\Desktop\\Сергей\\Личное\\Software\\java_pft\\addressbook.web.tests\\src\\test\\resources/%s.properties", target))));
+        properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         System.out.println(properties.getProperty("web.baseUrl"));
         wd.get(properties.getProperty("web.baseUrl"));
