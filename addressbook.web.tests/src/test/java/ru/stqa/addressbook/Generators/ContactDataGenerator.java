@@ -32,7 +32,7 @@ public class ContactDataGenerator {
         JCommander jCommander = new JCommander(generator);
         try {
             jCommander.parse(args);
-        }catch (ParameterException ex){
+        } catch (ParameterException ex) {
             jCommander.usage();
             return;
         }
@@ -57,32 +57,35 @@ public class ContactDataGenerator {
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactsData.class);
         String xml = xstream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
+
 
     private void saveAsCsv(List<ContactsData> contacts, File file) throws IOException {
         System.out.println(new File(".").getAbsolutePath());
-        Writer writer = new FileWriter(file);
-        for (ContactsData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getTest_first_name(), contact.getTest_last_name(), contact.getTest_middle_name()));
+        try (Writer writer = new FileWriter(file)) {
+            for (ContactsData contact : contacts) {
+                writer.write(String.format("%s;%s;%s\n", contact.getTest_first_name(),
+                        contact.getTest_last_name(), contact.getTest_middle_name()));
+            }
         }
-        writer.close();
     }
 
     private void saveAsJson(List<ContactsData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
-    private  List<ContactsData> generateContacts(int count) {
+    private List<ContactsData> generateContacts(int count) {
         List<ContactsData> contact = new ArrayList<ContactsData>();
-        for (int i =0; i < count; i++) {
-            contact.add(new ContactsData().withFirstName(String.format("firstName %s",i)).withLastName(String.format("lastName %s",i)).withMiddleName(String.format("middleName %s",i)));
-        } return contact;
+        for (int i = 0; i < count; i++) {
+            contact.add(new ContactsData().withFirstName(String.format("firstName %s", i)).withLastName(String.format("lastName %s", i)).withMiddleName(String.format("middleName %s", i)));
+        }
+        return contact;
     }
 }
