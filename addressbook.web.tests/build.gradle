@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.Test
+
 apply plugin: 'java'
 apply plugin: 'application'
 
@@ -12,4 +14,16 @@ dependencies {
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'com.thoughtworks.xstream:xstream:1.4.10'
     compile 'com.google.code.gson:gson:2.8.5'
+}
+
+task testGroups (type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testngGroups.xml'
+    }
+}
+
+task testContacts (type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/testngContacts.xml'
+    }
 }

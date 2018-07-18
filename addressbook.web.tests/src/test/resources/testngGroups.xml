@@ -8,12 +8,4 @@
             <class name="ru.stqa.addressbook.tests.GroupDeletionTests" />
         </classes>
     </test>
-
-    <test name="Contacts">
-        <classes>
-            <class name="ru.stqa.addressbook.tests.ContactsCreationTests"/>
-            <class name="ru.stqa.addressbook.tests.ContactsModificationTests"/>
-            <class name="ru.stqa.addressbook.tests.ContactDeletionTests"/>
-        </classes>
-    </test>
 </suite>
