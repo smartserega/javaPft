@@ -5,6 +5,7 @@ daemon
 .idea
 notifications
 out
+*.log
 
 
 # Ignore Gradle GUI config
