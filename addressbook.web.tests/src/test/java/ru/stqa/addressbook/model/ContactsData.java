@@ -3,45 +3,92 @@ package ru.stqa.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contacts")
 @Entity
+@Table(name = "addressbook")
 public class ContactsData {
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "firstname")
     private String test_first_name;
+
     @Expose
+    @Column(name = "middlename")
     private String test_middle_name;
+
     @Expose
+    @Column(name = "lastname")
     private String test_last_name;
+
+    @Column(name = "nickname")
     private String test_nickname;
+
+    @Column(name = "title")
     private String test_title;
+
+    @Column(name = "company")
     private String test_compane;
+
+    @Column(name = "address")
+    @Type(type = "text")
     private String test_address;
+
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Type(type = "text")
+    @Column(name = "mobile")
     private String mobile;
+
+    @Type(type = "text")
+    @Column(name = "email")
     private String email1;
+
+    @Type(type = "text")
+    @Column(name = "email2")
     private String email2;
+
+    @Type(type = "text")
+    @Column(name = "email3")
     private String email3;
+
+    @Transient
     private String group;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String work_phone;
+
+    @Transient
     private String allPhones;
 
+    @Type(type = "text")
+    @Column(name = "photo")
+    private String photo;
+
+    @Transient
+    private String allEmails;
+
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactsData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
-    private File photo;
 
     public String getAllEmails() {
         return allEmails;
@@ -75,9 +122,6 @@ public class ContactsData {
         return this;
     }
 
-    private String allEmails;
-
-
 
     public String getAllPhones() {
         return allPhones;
@@ -87,8 +131,6 @@ public class ContactsData {
         this.allPhones = allPhones;
         return this;
     }
-
-
 
 
     @Override
@@ -189,10 +231,6 @@ public class ContactsData {
     public String getTest_first_name() {
         return test_first_name;
     }
-
-
-
-
 
 
     public String getTest_middle_name() {
