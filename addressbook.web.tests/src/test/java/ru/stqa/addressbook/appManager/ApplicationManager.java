@@ -27,6 +27,7 @@ public class ApplicationManager {
     private GroupHelper groupHelper;
     private ContactsHelper contactsHelper;
     private String browser;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -36,6 +37,7 @@ public class ApplicationManager {
 
 
     public void init() throws IOException {
+        dbHelper = new DbHelper();
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
         } else if (browser.equals(BrowserType.CHROME)) {
@@ -53,7 +55,6 @@ public class ApplicationManager {
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         contactsHelper = new ContactsHelper(wd);
-
     }
 
 
@@ -72,4 +73,6 @@ public class ApplicationManager {
     public ContactsHelper contacts() {
         return contactsHelper;
     }
+
+    public DbHelper db() {return dbHelper;}
 }
