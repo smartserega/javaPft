@@ -23,18 +23,17 @@ public class HbConnectionTests {
                 .configure() // configures settings from hibernate.cfg.xml
                 .build();
         try {
-            sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-        }
-        catch (Exception e) {
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
             e.printStackTrace();
             // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
             // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy( registry );
+            StandardServiceRegistryBuilder.destroy(registry);
         }
     }
 
-    @Test (enabled = false)
-    public void testHbConnectionGroups(){
+    @Test(enabled = false)
+    public void testHbConnectionGroups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<GroupData> result = session.createQuery("from GroupData").list();
@@ -46,7 +45,7 @@ public class HbConnectionTests {
     }
 
     @Test
-    public void testHbConnectionContacts(){
+    public void testHbConnectionContacts() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();

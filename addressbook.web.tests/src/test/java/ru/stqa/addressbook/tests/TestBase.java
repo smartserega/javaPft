@@ -25,18 +25,18 @@ public class TestBase {
     }
 
 
-    @AfterSuite (alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() {
         app.stop();
     }
 
     @BeforeMethod
-    public void logTestStart(Method m, Object[] p){
+    public void logTestStart(Method m, Object[] p) {
         logger.info("Start Test " + m.getName() + "with parametrs " + Arrays.asList(p));
     }
 
-    @AfterMethod (alwaysRun = true)
-    public void logTestStop(Method m){
+    @AfterMethod(alwaysRun = true)
+    public void logTestStop(Method m) {
         logger.info("Stop Test " + m.getName());
     }
 
