@@ -2,11 +2,13 @@
   {
     "test_first_name": "firstName 0",
     "test_middle_name": "middleName 0",
-    "test_last_name": "lastName 0"
+    "test_last_name": "lastName 0",
+    "photo": "src/test/resources/photo.png"
   },
   {
     "test_first_name": "firstName 1",
     "test_middle_name": "middleName 1",
-    "test_last_name": "lastName 1"
+    "test_last_name": "lastName 1",
+    "photo": "src/test/resources/photo.png"
   }
 ]
