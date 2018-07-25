@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
+import ru.stqa.addressbook.model.GroupData;
+import ru.stqa.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -62,9 +64,14 @@ public class ContactsCreationTests extends TestBase {
 
     @Test(dataProvider = "validContactsFromJson")
     public void testContactsCreationTests(ContactsData contacts) {
+        Groups groups = app.db().groups();
+//        GroupData group = new GroupData();
+//        if (app.db().groups().size() == 0) {
+//            app.group().create(group);
+//        }
         app.goTo().contactPage();
         Contacts before = app.db().contacts();
-        app.contacts().create(contacts.withGroup("Test1"));
+        app.contacts().create(contacts.inGroup(groups.iterator().next()));
         app.goTo().contactPage();
         Contacts after = app.db().contacts();
         assertThat(after.size(), equalTo(before.size() + 1));
@@ -77,12 +84,13 @@ public class ContactsCreationTests extends TestBase {
 
     @Test(enabled = false)
     public void testContactsCreationBadTests() {
+        Groups groups = app.db().groups();
         app.goTo().contactPage();
         Contacts before = app.db().contacts();
         ContactsData contacts = new ContactsData().withFirstName("FirstName'").withMiddleName("MiddleName").
                 withLastName("LastName'").withNickname("nickname").withTitle("Title").withCompane("company").
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
-                withGroup("Test1");
+                inGroup(groups.iterator().next());
 
         app.contacts().create(contacts);
         app.goTo().contactPage();
