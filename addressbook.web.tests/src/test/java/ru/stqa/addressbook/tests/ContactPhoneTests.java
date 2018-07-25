@@ -18,10 +18,11 @@ public class ContactPhoneTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondtions() {
         Groups groups = app.db().groups();
-//        GroupData group = new GroupData();
-//        if (app.db().groups().size() == 0) {
-//            app.group().create(group);
-//        }
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("Test1"));
+        }
+
         app.goTo().contactPage();
         if (app.db().contacts().size() == 0) {
             app.contacts().create(new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
