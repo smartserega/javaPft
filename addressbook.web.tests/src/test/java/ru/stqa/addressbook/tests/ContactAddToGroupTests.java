@@ -10,12 +10,22 @@ import ru.stqa.addressbook.model.Groups;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactDeletionTests extends TestBase {
+public class ContactAddToGroupTests extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondtions() {
-        Groups groups = app.db().groups();
+        app.db().groups();
+
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("TestAddContactGroup"));
+        } else if (!app.contacts().findGroupForAdd()) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("TestAddContactGroup"));
+        }
+
         app.goTo().contactPage();
+        Groups groups = app.db().groups();
         if (app.db().contacts().size() == 0) {
             app.contacts().create(new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
                     withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
@@ -25,19 +35,13 @@ public class ContactDeletionTests extends TestBase {
     }
 
     @Test
-    public void contactsDeletionTest() {
-        app.goTo().contactPage();
+    public void addContactToGroupTests() {
         Contacts before = app.db().contacts();
-        ContactsData deletedContact = before.iterator().next();
-
         app.goTo().contactPage();
-        app.contacts().delete(deletedContact);
-        assertThat(app.contacts().getContactsCount(), equalTo(before.size() - 1));
+        ContactsData addedContact = before.iterator().next();
+        app.contacts().addContactToGroup(addedContact);
+        app.contacts().checkContactAddedToGroup(addedContact);
         Contacts after = app.db().contacts();
-        assertThat(after, equalTo(before.withOutAdded(deletedContact)));
-        verifyContactListInUi();
-
+        assertThat(after, equalTo(before.withOutAdded(addedContact).withAdded(addedContact)));
     }
-
-
 }
