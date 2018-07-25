@@ -3,6 +3,7 @@ package ru.stqa.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.Contacts;
@@ -62,13 +63,18 @@ public class ContactsCreationTests extends TestBase {
     }
 
 
+    @BeforeMethod
+    public void ensurePrecondtions() {
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("Test1"));
+        }
+    }
+
+
     @Test(dataProvider = "validContactsFromJson")
     public void testContactsCreationTests(ContactsData contacts) {
         Groups groups = app.db().groups();
-//        GroupData group = new GroupData();
-//        if (app.db().groups().size() == 0) {
-//            app.group().create(group);
-//        }
         app.goTo().contactPage();
         Contacts before = app.db().contacts();
         app.contacts().create(contacts.inGroup(groups.iterator().next()));
@@ -85,6 +91,10 @@ public class ContactsCreationTests extends TestBase {
     @Test(enabled = false)
     public void testContactsCreationBadTests() {
         Groups groups = app.db().groups();
+        if (app.db().groups().size() == 0) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("Test1"));
+        }
         app.goTo().contactPage();
         Contacts before = app.db().contacts();
         ContactsData contacts = new ContactsData().withFirstName("FirstName'").withMiddleName("MiddleName").
