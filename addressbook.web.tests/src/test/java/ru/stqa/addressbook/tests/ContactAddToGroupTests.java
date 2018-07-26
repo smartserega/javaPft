@@ -7,6 +7,10 @@ import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,6 +23,7 @@ public class ContactAddToGroupTests extends TestBase {
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("TestAddContactGroup"));
+
         } else if (!app.contacts().findGroupForAdd()) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("TestAddContactGroup"));
@@ -36,12 +41,32 @@ public class ContactAddToGroupTests extends TestBase {
 
     @Test
     public void addContactToGroupTests() {
-        Contacts before = app.db().contacts();
-        app.goTo().contactPage();
-        ContactsData addedContact = before.iterator().next();
-        app.contacts().addContactToGroup(addedContact);
-        app.contacts().checkContactAddedToGroup(addedContact);
-        Contacts after = app.db().contacts();
-        assertThat(after, equalTo(before.withOutAdded(addedContact).withAdded(addedContact)));
+        Contacts contacts = app.db().contacts();
+        Groups groups = app.db().groups();
+        for (ContactsData list : contacts) {
+            list.getGroups();
+            int id = list.getId();
+            System.out.println("!!!!" + list.getGroups());
+            System.out.println(list.withId(id));
+        }
+
     }
+
+
+
+        //System.out.println(contact.getGroups());
+
+
+//        ArrayList contactsList = new ArrayList();
+//        contactsList.add(contact);
+//        System.out.println("!!!!!!!!!!!!!!!"+contact.getGroups());
+
+
+//        app.goTo().contactPage();
+//        ContactsData addedContact = before.iterator().next();
+
+//        app.contacts().checkContactAddedToGroup(addedContact);
+//        Contacts after = app.db().contacts();
+//        assertThat(after, equalTo(before.withOutAdded(addedContact).withAdded(addedContact)));
+
 }

@@ -39,6 +39,7 @@ public class HbConnectionTests {
         List<GroupData> result = session.createQuery("from GroupData").list();
         for (GroupData group : result) {
             System.out.println(group);
+
         }
         session.getTransaction().commit();
         session.close();
@@ -51,7 +52,7 @@ public class HbConnectionTests {
         List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();
         for (ContactsData contact : result) {
             System.out.println(contact);
-            System.out.println(contact.getGroups());
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!"+ contact.getGroups());
         }
         session.getTransaction().commit();
         session.close();
