@@ -33,17 +33,30 @@ public class ContactAddToGroupTests extends TestBase {
 
     @Test
     public void addContactToGroupTests() {
-        int groupSize = app.db().groups().size();
-        System.out.println("Размер груп равен " + groupSize);
         int allContactSize = app.db().contacts().size();
-        System.out.println("Список всех контактов " + allContactSize);
-        System.out.println("увидим что " + findGoodContactForAdd(allContactSize));
-        int goodContactID = findGoodContactForAdd(allContactSize);
-
-        System.out.println("подходящая группа для контакта " + findContactInGroup(goodContactID));
+        System.out.println("Подходящий контакт для группы " + findGoodContactForAdd(allContactSize));
+        Set goodContact = findGoodContactForAdd(allContactSize);
+         findGoodGroupForContact(goodContact);
     }
 
-    public int findGoodContactForAdd(int allContactSize) {
+
+    public int findGoodGroupForContact(Set goodContact) {
+        ContactsData contact = new ContactsData();
+        Groups allgroups = app.db().groups(); //список всех групп
+        GroupData oneOfGroupWithContact = allgroups.iterator().next();
+        for (allgroups : oneOfGroupWithContact){
+            if (Objects.equals(oneOfGroupWithContact, goodContact);
+        }
+//            if (Objects.equals(group.getId(), goodContact)) {
+//                System.out.println("подходящая группа group.getId()");
+//                return group.getId();
+//            } else System.out.println("группа не найдена");
+//
+//        return groups.iterator().next().getId();
+    }
+
+
+    public Contacts findGoodContactForAdd(int allContactSize) {
         Contacts contacts = app.db().contacts();
         for (ContactsData contact : contacts) {
             if (contact.getGroups().size() == allContactSize) {
@@ -52,20 +65,12 @@ public class ContactAddToGroupTests extends TestBase {
             if (contact.getGroups().size() != allContactSize) {
 
                 System.out.println("id подходящего контакта " + contact.getId());
-                return contact.getId();
+                return contact;
             }
         }
-        return contacts.iterator().next().getId();
-    }
-
-
-    public GroupData findContactInGroup(int goodContactID) {
-        Groups allGroupsWithCurrantContact = contact.getGroups();
-
-        return null;
+        return contacts;
     }
 }
-
 
 //        Contacts contacts = app.db().contacts();
 //        int contactID = contacts.iterator().next().getId();
@@ -109,7 +114,8 @@ public class ContactAddToGroupTests extends TestBase {
 //        внутри него
 //        +1) получаем полный список групп
 //        +2) получает список групп, в которые входит этот контакт
-//        3) в цикле проходим по полному списку и для каждой группы проверяем, входит она во второй список или нет
+//        3) в цикле проходим по полному списку и для каждой группы проверяем, входит она во второй
+//// список или нет
 //        как только находится группа, которая этому условию не удовлетворяет -- мы нашли подходящую группу
 //
 //    Groups a = contact.getGroups(); // список всех групп куда входит случайный контакт
