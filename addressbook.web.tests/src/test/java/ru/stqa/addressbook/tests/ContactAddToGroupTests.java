@@ -60,12 +60,7 @@ public class ContactAddToGroupTests extends TestBase {
 
 
     public GroupData findContactInGroup(int goodContactID) {
-        ContactsData contact = new ContactsData();
-       // Groups groups = app.db().groups();
-
-        for (GroupData groups : groupsOfCurrentContact.iterator().next(){
-            System.out.println(groups);
-    }
+        Groups allGroupsWithCurrantContact = contact.getGroups();
 
         return null;
     }
@@ -116,3 +111,9 @@ public class ContactAddToGroupTests extends TestBase {
 //        +2) получает список групп, в которые входит этот контакт
 //        3) в цикле проходим по полному списку и для каждой группы проверяем, входит она во второй список или нет
 //        как только находится группа, которая этому условию не удовлетворяет -- мы нашли подходящую группу
+//
+//    Groups a = contact.getGroups(); // список всех групп куда входит случайный контакт
+//
+//    GroupData b = a..iterator().next(); // возвращается одна из групп, куда входит случайный контакт
+//
+//    GroupData c = b.withId(id); // возаращается id контакта включенного в группу
