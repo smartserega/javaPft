@@ -97,13 +97,5 @@ public class GroupHelper extends HelperBase {
         return new Groups(groupCashe);
     }
 
-    public void removeContactFromGroup() {
-        click(By.name("remove"));
-    }
-
-    public void AddContactFromGroup() {
-        click(By.name("remove"));
-    }
-
 
 }

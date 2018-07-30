@@ -144,11 +144,16 @@ public class ContactsHelper extends HelperBase {
         return isElementPresent((By.xpath(".//*[contains(text(), 'TestAddContactGroup')]")));
     }
 
-    public void addContactToGroup() {
+    public void addContactToGroup(ContactsData contact) {
+        selectContactById(contact.getId());
+        wd.findElement(By.name("to_group")).click();
         wd.findElement(By.xpath("//*[@id=\"content\"]/form[2]/div[4]/select//*[contains(text(), 'TestAddContactGroup')]")).click();
         wd.findElement(By.xpath("//*[@id=\"content\"]//div[4]/input")).click();
     }
 
+    public void checkContactAddedToGroup(ContactsData contactsData) {
+
+    }
 }
 
 
