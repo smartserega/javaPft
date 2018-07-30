@@ -7,6 +7,9 @@ import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 
+import java.util.Objects;
+import java.util.Set;
+
 public class ContactAddToGroupTests extends TestBase {
 
     @BeforeMethod
@@ -35,23 +38,36 @@ public class ContactAddToGroupTests extends TestBase {
         int allContactSize = app.db().contacts().size();
         System.out.println("Список всех контактов " + allContactSize);
         System.out.println("увидим что " + findGoodContactForAdd(allContactSize));
+        int goodContactID = findGoodContactForAdd(allContactSize);
+
+        System.out.println("подходящая группа для контакта " + findContactInGroup(goodContactID));
     }
 
-    private int findGoodContactForAdd(int allContactSize) {
+    public int findGoodContactForAdd(int allContactSize) {
         Contacts contacts = app.db().contacts();
         for (ContactsData contact : contacts) {
-            System.out.println("размер не знаю чего" + contact.getGroups().size());
             if (contact.getGroups().size() == allContactSize) {
-                System.out.println("контакт не тот");
+
             }
             if (contact.getGroups().size() != allContactSize) {
-                System.out.println("контакт тот");
-                System.out.println("id нужного контакта " + contact.getId());
+
+                System.out.println("id подходящего контакта " + contact.getId());
                 return contact.getId();
             }
-
         }
-        return allContactSize;
+        return contacts.iterator().next().getId();
+    }
+
+
+    public GroupData findContactInGroup(int goodContactID) {
+        ContactsData contact = new ContactsData();
+       // Groups groups = app.db().groups();
+
+        for (GroupData groups : groupsOfCurrentContact.iterator().next(){
+            System.out.println(groups);
+    }
+
+        return null;
     }
 }
 
@@ -87,7 +103,7 @@ public class ContactAddToGroupTests extends TestBase {
 //    давайте я ещё раз повторю ту схему, которую я предлагаю
 //      +  1) сначала узнаем общее количество групп в приложении
 //      +  2) потом получаем полный список контактов
-//        3) в цикле проходим по всем контактам, и для каждого из них проверяем размер списка групп,
+//      +  3) в цикле проходим по всем контактам, и для каждого из них проверяем размер списка групп,
 //          в которые этот контакт входит.
 //          - если размер совпадает с размером полного списка групп -- нам такой контакт не нужен.
 //          - если размер меньше -- значит этот контакт "хороший", подходит для наших целей, его можно в какую-то группу добавить
@@ -96,7 +112,7 @@ public class ContactAddToGroupTests extends TestBase {
 //        затем реализуем второй метод
 //        "найти группу, в которую не входит ЭТОТ контакт"
 //        внутри него
-//        1) получаем полный список групп
-//        2) получает список групп, в которые входит этот контакт
+//        +1) получаем полный список групп
+//        +2) получает список групп, в которые входит этот контакт
 //        3) в цикле проходим по полному списку и для каждой группы проверяем, входит она во второй список или нет
 //        как только находится группа, которая этому условию не удовлетворяет -- мы нашли подходящую группу
