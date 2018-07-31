@@ -1,0 +1,35 @@
+import org.gradle.api.tasks.testing.Test
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.testng:testng:6.14.3'
+    compile 'org.seleniumhq.selenium:selenium-java:3.9.1'
+    compile 'org.hamcrest:java-hamcrest:2.0.0.0'
+
+
+
+}
+
+test {
+    useTestNG() {
+        suites 'src/test/resources/testngGroups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty('browser', "${browser}")
+    }
+
+    if (project.hasProperty('target')) {
+        systemProperty('target', "${target}")
+    }
+
+    if (project.hasProperty('verifyUI')) {
+        systemProperty('verifyUI', "${verifyUI}")
+    }
+}
