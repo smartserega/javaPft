@@ -7,9 +7,6 @@ import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 
-import java.util.Objects;
-import java.util.Set;
-
 public class ContactAddToGroupTests extends TestBase {
 
     @BeforeMethod
@@ -35,24 +32,17 @@ public class ContactAddToGroupTests extends TestBase {
     public void addContactToGroupTests() {
         int allContactSize = app.db().contacts().size();
         System.out.println("Подходящий контакт для группы " + findGoodContactForAdd(allContactSize));
-        Set goodContact = findGoodContactForAdd(allContactSize);
-         findGoodGroupForContact(goodContact);
-    }
-
-
-    public int findGoodGroupForContact(Set goodContact) {
-        ContactsData contact = new ContactsData();
         Groups allgroups = app.db().groups(); //список всех групп
-        GroupData oneOfGroupWithContact = allgroups.iterator().next();
-        for (allgroups : oneOfGroupWithContact){
-            if (Objects.equals(oneOfGroupWithContact, goodContact);
+        GroupData oneOfGroupWithContact = allgroups.iterator().next(); //одна из групп с контатами
+        System.out.println("!!!!!!!! ОТВЕТ" + app.contacts().isGroupInCollection(oneOfGroupWithContact, allgroups));
+        System.out.println("все группы" + allgroups);
+        System.out.println("группа с контактом" + oneOfGroupWithContact);
+
+        if (app.contacts().isGroupInCollection(oneOfGroupWithContact, allgroups)) {
+            System.out.println(oneOfGroupWithContact.getId());
+        } else {
+            app.group().create(new GroupData().withName("TestAddContactGroup"));
         }
-//            if (Objects.equals(group.getId(), goodContact)) {
-//                System.out.println("подходящая группа group.getId()");
-//                return group.getId();
-//            } else System.out.println("группа не найдена");
-//
-//        return groups.iterator().next().getId();
     }
 
 
@@ -70,34 +60,9 @@ public class ContactAddToGroupTests extends TestBase {
         }
         return contacts;
     }
+
+
 }
-
-//        Contacts contacts = app.db().contacts();
-//        int contactID = contacts.iterator().next().getId();
-//        findContactInGroup(contactID);
-//    }
-//
-//
-//    public ContactsData findContactInGroup(int contactID) {
-//        ContactsData contact = new ContactsData();
-//        contact = contact.withId(contactID);
-//        for (GroupData group : contact.getGroups())
-//                if (Objects.equals(group.getId(), contactID)) {
-//                    System.out.println("группа найдена");
-//                } else System.out.println("группа не найдена");
-//
-//        System.out.println(contact);
-//        return contact;
-//    }
-//}
-
-
-//
-//            System.out.println("groupsOfCurrentContact" + groupsOfCurrentContact);
-//            GroupData oneOfGroupWithId = groupsOfCurrentContact.iterator().next();
-//            GroupData groupWithAmendedId = oneOfGroupWithId.withId(id);
-////            System.out.println("!!!" + groupWithAmendedId);
-//        }
 
 
 //    давайте я ещё раз повторю ту схему, которую я предлагаю
@@ -123,3 +88,19 @@ public class ContactAddToGroupTests extends TestBase {
 //    GroupData b = a..iterator().next(); // возвращается одна из групп, куда входит случайный контакт
 //
 //    GroupData c = b.withId(id); // возаращается id контакта включенного в группу
+
+
+//    public int findGoodGroupForContact(Set goodContact) {
+//        ContactsData contact = new ContactsData();
+//        Groups allgroups = app.db().groups(); //список всех групп
+//        GroupData oneOfGroupWithContact = allgroups.iterator().next(); //одна из групп с контатами
+//        for (allgroups : oneOfGroupWithContact){
+//            if (Objects.equals(oneOfGroupWithContact, goodContact);
+//        }
+////            if (Objects.equals(group.getId(), goodContact)) {
+////                System.out.println("подходящая группа group.getId()");
+////                return group.getId();
+////            } else System.out.println("группа не найдена");
+////
+////        return groups.iterator().next().getId();
+//    }
