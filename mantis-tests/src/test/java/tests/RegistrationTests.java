@@ -7,7 +7,5 @@ public class RegistrationTests extends TestBase{
     @Test
     public void testReRegistration(){
         app.registration().start("user1", "user1@localhost.localdomain");
-
-
     }
 }
