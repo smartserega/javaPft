@@ -143,7 +143,7 @@ public class ContactsHelper extends HelperBase {
 
     public boolean findGroupForAdd() {
         wd.findElement(By.name("to_group")).click();
-        return isElementPresent(( By.xpath(".//*[contains(text(), 'TestAddContactGroup')]") ));
+        return isElementPresent((By.xpath(".//*[contains(text(), 'TestAddContactGroup')]")));
     }
 
     public void addContactToGroup(ContactsData contact) {

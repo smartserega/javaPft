@@ -2,6 +2,7 @@ package ru.stqa.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.addressbook.appManager.HelperBase;
 import ru.stqa.addressbook.model.Contacts;
 import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
@@ -9,10 +10,12 @@ import ru.stqa.addressbook.model.Groups;
 
 public class ContactAddToGroupTests extends TestBase {
 
+
     @BeforeMethod
     public void ensurePrecondtions() {
         app.db().groups();
-
+        System.out.println(randomNumber());
+        System.out.println("РАНДОМНОЕ ЧИСЛО"+ randomNumber());
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("TestAddContactGroup"));
@@ -28,8 +31,13 @@ public class ContactAddToGroupTests extends TestBase {
         }
     }
 
+    public int randomNumber() {
+        return 1 + (int) (Math.random() * 1500000);
+    }
+
     @Test
     public void addContactToGroupTests() {
+
         int allContactSize = app.db().contacts().size();
         System.out.println("Подходящий контакт для группы " + findGoodContactForAdd(allContactSize));
         Groups allgroups = app.db().groups(); //список всех групп

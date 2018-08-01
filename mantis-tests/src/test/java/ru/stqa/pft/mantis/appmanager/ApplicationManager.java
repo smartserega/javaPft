@@ -18,7 +18,7 @@ import static org.openqa.selenium.remote.BrowserType.IE;
 
 public class ApplicationManager {
     private final Properties properties;
-    private WebDriver wd;
+    WebDriver wd;
 
 
     private String browser;
