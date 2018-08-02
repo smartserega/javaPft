@@ -21,17 +21,11 @@ public class ContactDeleteFromGroupTests extends TestBase{
                 withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru"));
 
-
-
-
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
-
         int before = app.db().connectionsNumber();
-
         app.goTo().contactPage();
         app.contacts().deleteUnicContacFromUnicGroup(unicNumber);
-
         int after = app.db().connectionsNumber();
         assertThat(after, equalTo(before-1));
 

@@ -21,7 +21,6 @@ public class ContactAddToGroupTests extends TestBase {
                 withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru"));
 
-
         int before = app.db().connectionsNumber();
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
