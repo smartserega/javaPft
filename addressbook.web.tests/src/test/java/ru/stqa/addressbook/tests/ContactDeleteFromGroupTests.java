@@ -17,11 +17,9 @@ public class ContactDeleteFromGroupTests extends TestBase{
         app.goTo().groupPage();
         app.group().create(new GroupData().withName("TestAddContactGroup-" + unicNumber));
         app.goTo().contactPage();
-        Groups groups = app.db().groups();
-        app.contacts().create(new ContactsData().withFirstName("FirstName-" + unicNumber).withMiddleName("MiddleName").
+        app.contacts().createContact(new ContactsData().withFirstName("FirstName-" + unicNumber).withMiddleName("MiddleName").
                 withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
-                withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
-                inGroup(groups.iterator().next()));
+                withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru"));
 
 
 
