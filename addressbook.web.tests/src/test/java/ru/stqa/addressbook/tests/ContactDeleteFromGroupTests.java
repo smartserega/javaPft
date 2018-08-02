@@ -13,7 +13,7 @@ public class ContactDeleteFromGroupTests extends TestBase{
     @Test
     public void deleteContactFromGroupTests() throws Exception {
         int unicNumber = app.contacts().randomNumber();
-        app.db().set();
+
         app.goTo().groupPage();
         app.group().create(new GroupData().withName("TestAddContactGroup-" + unicNumber));
         app.goTo().contactPage();
@@ -23,24 +23,21 @@ public class ContactDeleteFromGroupTests extends TestBase{
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
                 inGroup(groups.iterator().next()));
 
-        int after = app.db().connectionContacts().size();
+
 
 
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
 
+        int before = app.db().connectionsNumber();
 
         app.goTo().contactPage();
         app.contacts().deleteUnicContacFromUnicGroup(unicNumber);
 
-        int before = app.db().connectionContacts().size();
-        assertThat(after, equalTo(before));
+        int after = app.db().connectionsNumber();
+        assertThat(after, equalTo(before-1));
 
-//        app.goTo().contactPage();
-//        app.contacts().deleteUnicContact(unicNumber);
-//        app.goTo().groupPage();
-//        app.group().deleteUnicGroup(unicNumber);
-    }
+}
 
 
 }

@@ -86,36 +86,17 @@ public class DbHelper {
         }
     }
 
-    public void set() throws Exception {
-        // A SessionFactory is set up once for an application!
-        SessionFactory sessionFactory;
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
-        try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy(registry);
-        }
-    }
-    public List<ContactsData> connectionContacts() {
+
+    public int connectionsNumber() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();
+
+        int sum = 0;
         for (ContactsData contact : result) {
-                if (contact.getGroups().size() < 1){
-                    return null;
-                } else return result;
+            sum = sum + contact.getGroups().size();
             }
-
-//            contact.getGroups();
-//            System.out.println(contact.getGroups().size());
-
-        System.out.println("РЕЗУЛЬТАТ "+ result);
-        return result;
+        return sum;
     }
 }
 

@@ -11,9 +11,8 @@ public class ContactAddToGroupTests extends TestBase {
 
 
     @Test
-    public void addContactToGroupTests() throws Exception {
+    public void addContactToGroupTests() {
         int unicNumber = app.contacts().randomNumber();
-        app.db().set();
         app.goTo().groupPage();
         app.group().create(new GroupData().withName("TestAddContactGroup-" + unicNumber));
 
@@ -23,22 +22,12 @@ public class ContactAddToGroupTests extends TestBase {
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru"));
 
 
-        System.out.println("ДО" + app.db().connectionContacts());
-        int after = app.db().connectionContacts().size();
-
-
+        int before = app.db().connectionsNumber();
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
-        System.out.println("ПОСЛЕ" + app.db().connectionContacts());
-
-        int before = app.db().connectionContacts().size();
+        int after = app.db().connectionsNumber();
         assertThat(after, equalTo(before+1));
 
-
-        app.goTo().contactPage();
-        app.contacts().deleteUnicContact(unicNumber);
-        app.goTo().groupPage();
-        app.group().deleteUnicGroup(unicNumber);
     }
 
 

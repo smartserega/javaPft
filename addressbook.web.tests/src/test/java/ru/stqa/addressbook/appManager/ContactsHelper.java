@@ -24,20 +24,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void fillContactData(ContactsData contactsData, boolean creation) {
-        type(By.name("firstname"), contactsData.getTest_first_name());
-        type(By.name("middlename"), contactsData.getTest_middle_name());
-        type(By.name("lastname"), contactsData.getTest_last_name());
-        type(By.name("nickname"), contactsData.getTest_nickname());
-        type(By.name("title"), contactsData.getTest_title());
-        type(By.name("company"), contactsData.getTest_compane());
-        type(By.name("address"), contactsData.getAddress());
-        type(By.name("mobile"), contactsData.getMobile());
-        type(By.name("home"), contactsData.getHomePhone());
-        type(By.name("work"), contactsData.getWorkPhone());
-        type(By.name("email"), contactsData.getEmail1());
-        type(By.name("email2"), contactsData.getEmail2());
-        type(By.name("email3"), contactsData.getEmail3());
-//        attach(By.name("photo"), contactsData.getPhoto());
+        fillContactDataWithoutGroup(contactsData);
 
         if (creation) {
             if (contactsData.getGroups().size() > 0)
@@ -120,7 +107,6 @@ public class ContactsHelper extends HelperBase {
         returntoContactPage();
     }
 
-
     private Contacts groupCashe = null;
 
     public Contacts all() {
@@ -182,53 +168,8 @@ public class ContactsHelper extends HelperBase {
     }
 
 
-    public boolean isGroupInCollection(GroupData oneOfGroupWithContact, Groups allgroups) {
-        for (GroupData group : allgroups) {
-            System.out.println(allgroups);
-            if (group != oneOfGroupWithContact) {
-                return true;
-            }
-            if (allgroups.iterator().next().getId() == oneOfGroupWithContact.getId()) {
-
-                return false;
-            }
-        }
-        return true;
-    }
-
     public int randomNumber() {
         return 1 + (int) ( Math.random() * 1500000 );
-    }
-
-    public void ConnectionTest() {
-        Connection conn = null;
-
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:/addressbook?user=root&password=&serverTimezone=UTC");
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select  id, firstname, lastname from addressbook where deprecated = '0000-00-00' ");
-
-            Contacts contacts = new Contacts();
-            while (rs.next()) {
-                contacts.add(new ContactsData().withId(rs.getInt("id")).withFirstName(rs.getString("firstname"))
-                        .withLastName(rs.getString("lastname")));
-            }
-
-            rs.close();
-            st.close();
-            conn.close();
-
-            System.out.println(contacts);
-
-            // Do something with the Connection
-
-
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
     }
 
     public void createContact(ContactsData contact) {

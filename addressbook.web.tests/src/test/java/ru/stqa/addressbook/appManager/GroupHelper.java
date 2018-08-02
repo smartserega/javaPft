@@ -95,11 +95,4 @@ public class GroupHelper extends HelperBase {
         return new Groups(groupCashe);
     }
 
-    public void deleteUnicGroup(int unicName) {
-        wd.findElement(By.xpath(".//*[@id=\"content\"]/..//*[contains(text(), '" + unicName + "')]")).click();
-        wd.findElement(By.name("delete")).click();
-    }
-
-
-
 }

@@ -71,7 +71,7 @@ public class ContactsCreationTests extends TestBase {
     }
 
 
-    @Test(dataProvider = "validContactsFromJson")
+    @Test(dataProvider = "validContactsFromJson", enabled = false)
     public void testContactsCreationTests(ContactsData contacts) {
         Groups groups = app.db().groups();
         app.goTo().contactPage();
@@ -87,7 +87,7 @@ public class ContactsCreationTests extends TestBase {
 
     }
 
-    @Test(enabled = false)
+    @Test
     public void testContactsCreationBadTests() {
         Groups groups = app.db().groups();
         if (app.db().groups().size() == 0) {
@@ -96,7 +96,7 @@ public class ContactsCreationTests extends TestBase {
         }
         app.goTo().contactPage();
         Contacts before = app.db().contacts();
-        ContactsData contacts = new ContactsData().withFirstName("FirstName'").withMiddleName("MiddleName").
+        ContactsData contacts = new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
                 withLastName("LastName'").withNickname("nickname").withTitle("Title").withCompane("company").
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
                 inGroup(groups.iterator().next());
