@@ -49,6 +49,23 @@ public class ContactsHelper extends HelperBase {
         }
     }
 
+    public void fillContactDataWithoutGroup(ContactsData contactsData) {
+        type(By.name("firstname"), contactsData.getTest_first_name());
+        type(By.name("middlename"), contactsData.getTest_middle_name());
+        type(By.name("lastname"), contactsData.getTest_last_name());
+        type(By.name("nickname"), contactsData.getTest_nickname());
+        type(By.name("title"), contactsData.getTest_title());
+        type(By.name("company"), contactsData.getTest_compane());
+        type(By.name("address"), contactsData.getAddress());
+        type(By.name("mobile"), contactsData.getMobile());
+        type(By.name("home"), contactsData.getHomePhone());
+        type(By.name("work"), contactsData.getWorkPhone());
+        type(By.name("email"), contactsData.getEmail1());
+        type(By.name("email2"), contactsData.getEmail2());
+        type(By.name("email3"), contactsData.getEmail3());
+
+    }
+
     public void initAddNewContact() {
         click(By.linkText("add new"));
     }
@@ -214,6 +231,11 @@ public class ContactsHelper extends HelperBase {
         }
     }
 
+    public void createContact(ContactsData contact) {
+        initAddNewContact();
+        fillContactDataWithoutGroup(contact);
+        initContactCreation();
+    }
 }
 
 
