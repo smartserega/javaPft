@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -97,5 +95,8 @@ public class GroupHelper extends HelperBase {
         return new Groups(groupCashe);
     }
 
-
+    public void deleteUnicGroup(int unicName) {
+        wd.findElement(By.xpath(".//*[@id=\"content\"]/..//*[contains(text(), '" + unicName + "')]")).click();
+        wd.findElement(By.name("delete")).click();
+    }
 }

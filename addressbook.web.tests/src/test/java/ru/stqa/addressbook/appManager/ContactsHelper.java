@@ -141,17 +141,28 @@ public class ContactsHelper extends HelperBase {
                 withLastName(lastname).withHomePhone(home).withMobile(mobile).withWorkPhone(work).withEmail1(email).withEmail2(emai2).withEmail3(emai3).withAddress(address);
     }
 
-    public boolean findGroupForAdd() {
+    public void addUnicContactToUnicGroup(int unicName) {
+        wd.findElement(By.xpath(".//*[contains(text(), '" + unicName + "')]/../td[last()-9]")).click();
         wd.findElement(By.name("to_group")).click();
-        return isElementPresent((By.xpath(".//*[contains(text(), 'TestAddContactGroup')]")));
-    }
-
-    public void addContactToGroup(ContactsData contact) {
-        selectContactById(contact.getId());
-        wd.findElement(By.name("to_group")).click();
-        wd.findElement(By.xpath("//*[@id=\"content\"]/form[2]/div[4]/select//*[contains(text(), 'TestAddContactGroup')]")).click();
+        wd.findElement(By.xpath("//*[@id=\"content\"]/form[2]/div[4]/select//*[contains(text(), '" + unicName + "')]")).click();
         wd.findElement(By.xpath("//*[@id=\"content\"]//div[4]/input")).click();
     }
+
+    public void deleteUnicContacFromUnicGroup(int unicNumber) {
+
+        wd.findElement(By.xpath(".//*[@id=\"right\"]/select")).click();
+        wd.findElement(By.xpath(".//*[@id=\"right\"]/select//*[contains(text(), '" + unicNumber + "')]")).click();
+        wd.findElement(By.xpath(".//*[contains(text(), '" + unicNumber + "')]/../td[last()-9]")).click();
+
+        wd.findElement(By.name("remove")).click();
+    }
+
+    public void deleteUnicContact(int unicName) {
+        wd.findElement(By.xpath(".//*[contains(text(), '" + unicName + "')]/../td[last()-9]")).click();
+        wd.findElement(By.cssSelector("input[value=Delete]")).click();
+        wd.switchTo().alert().accept();
+    }
+
 
     public boolean isGroupInCollection(GroupData oneOfGroupWithContact, Groups allgroups) {
         for (GroupData group : allgroups) {
@@ -166,6 +177,11 @@ public class ContactsHelper extends HelperBase {
         }
         return true;
     }
+
+    public int randomNumber() {
+        return 1 + (int) ( Math.random() * 1500000 );
+    }
+
 
 
 }
