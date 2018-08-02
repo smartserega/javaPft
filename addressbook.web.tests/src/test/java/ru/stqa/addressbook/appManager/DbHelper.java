@@ -10,6 +10,7 @@ import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
 import ru.stqa.addressbook.model.Groups;
 
+import java.sql.*;
 import java.util.List;
 
 public class DbHelper {
@@ -26,7 +27,7 @@ public class DbHelper {
 
     }
 
-    public Groups groups(){
+    public Groups groups() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<GroupData> result = session.createQuery("from GroupData").list();
@@ -35,7 +36,7 @@ public class DbHelper {
         return new Groups(result);
     }
 
-    public Contacts contacts(){
+    public Contacts contacts() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();
@@ -43,5 +44,62 @@ public class DbHelper {
         session.close();
         return new Contacts(result);
     }
+
+//    public Groups getAssignedGroups(String firstname){
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        List<GroupData> result = session.createQuery("select contacts.groups from NewContactData contacts where contacts.firstName = :firstname")
+//                .setParameter("firstname", firstname).list();
+//        session.getTransaction().commit();
+//        session.close();
+//        return new Groups (result);
+//    }
+
+    public void groupsWithConnection() {
+        Connection conn = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:/addressbook?user=root&password=&serverTimezone=UTC");
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select  id, firstname, lastname from addressbook where deprecated = '0000-00-00' ");
+
+            Contacts contacts = new Contacts();
+            while (rs.next()) {
+                contacts.add(new ContactsData().withId(rs.getInt("id")).withFirstName(rs.getString("firstname"))
+                        .withLastName(rs.getString("lastname")));
+            }
+
+            rs.close();
+            st.close();
+            conn.close();
+
+            System.out.println(contacts);
+
+            // Do something with the Connection
+
+
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
+
+    public int connectionContacts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();
+        for (ContactsData contact: result){
+            contact.getGroups().size();
+        }
+        session.getTransaction().commit();
+
+    }
+    return contact();
 }
+
+
+
+
 

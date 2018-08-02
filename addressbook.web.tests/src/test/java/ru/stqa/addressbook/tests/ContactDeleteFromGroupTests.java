@@ -9,6 +9,8 @@ public class ContactDeleteFromGroupTests extends TestBase{
 
     @Test
     public void deleteContactFromGroupTests() {
+
+
         int unicNumber = app.contacts().randomNumber();
         app.goTo().groupPage();
         app.group().create(new GroupData().withName("TestAddContactGroup-" + unicNumber));
@@ -19,8 +21,12 @@ public class ContactDeleteFromGroupTests extends TestBase{
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
                 inGroup(groups.iterator().next()));
 
+
+
+
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
+
 
         app.goTo().contactPage();
         app.contacts().deleteUnicContacFromUnicGroup(unicNumber);

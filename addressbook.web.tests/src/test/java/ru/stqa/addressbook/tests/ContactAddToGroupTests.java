@@ -21,12 +21,23 @@ public class ContactAddToGroupTests extends TestBase {
                 withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
                 inGroup(groups.iterator().next()));
 
+
+
+        app.db().connectionContacts();
+
+
+
         app.goTo().contactPage();
         app.contacts().addUnicContactToUnicGroup(unicNumber);
-        app.goTo().contactPage();
-        app.contacts().deleteUnicContact(unicNumber);
-        app.goTo().groupPage();
-        app.group().deleteUnicGroup(unicNumber);
+
+        app.db().connectionContacts();
+
+
+
+//        app.goTo().contactPage();
+//        app.contacts().deleteUnicContact(unicNumber);
+//        app.goTo().groupPage();
+//        app.group().deleteUnicGroup(unicNumber);
     }
 
 

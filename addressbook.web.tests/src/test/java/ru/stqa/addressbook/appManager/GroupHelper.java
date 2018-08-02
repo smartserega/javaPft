@@ -99,4 +99,7 @@ public class GroupHelper extends HelperBase {
         wd.findElement(By.xpath(".//*[@id=\"content\"]/..//*[contains(text(), '" + unicName + "')]")).click();
         wd.findElement(By.name("delete")).click();
     }
+
+
+
 }
