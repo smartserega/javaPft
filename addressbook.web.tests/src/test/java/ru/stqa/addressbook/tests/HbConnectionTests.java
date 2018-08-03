@@ -50,11 +50,9 @@ public class HbConnectionTests {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<ContactsData> result = session.createQuery("from ContactsData where deprecated = '0000-00-00'").list();
-        int sum = 0;
         for (ContactsData contact : result) {
+            System.out.println("ОДИН КОНТАТ ?" + contact.getGroups().iterator().next());
 
-            sum = sum + contact.getGroups().size();
-            System.out.println("Кажись оно "+ sum);
         }
         session.getTransaction().commit();
         session.close();

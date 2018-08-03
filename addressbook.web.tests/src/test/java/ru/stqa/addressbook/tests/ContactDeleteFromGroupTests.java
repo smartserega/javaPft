@@ -3,12 +3,11 @@ package ru.stqa.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.ContactsData;
 import ru.stqa.addressbook.model.GroupData;
-import ru.stqa.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactDeleteFromGroupTests extends TestBase{
+public class ContactDeleteFromGroupTests extends TestBase {
 
     @Test
     public void deleteContactFromGroupTests() throws Exception {
@@ -27,9 +26,9 @@ public class ContactDeleteFromGroupTests extends TestBase{
         app.goTo().contactPage();
         app.contacts().deleteUnicContacFromUnicGroup(unicNumber);
         int after = app.db().connectionsNumber();
-        assertThat(after, equalTo(before-1));
+        assertThat(after, equalTo(before - 1));
 
-}
+    }
 
 
 }
