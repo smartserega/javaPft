@@ -12,6 +12,7 @@ import ru.stqa.addressbook.model.Groups;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Set;
 
 public class ContactsHelper extends HelperBase {
 
@@ -145,19 +146,18 @@ public class ContactsHelper extends HelperBase {
                 withLastName(lastname).withHomePhone(home).withMobile(mobile).withWorkPhone(work).withEmail1(email).withEmail2(emai2).withEmail3(emai3).withAddress(address);
     }
 
-    public void addUnicContactToUnicGroup(int unicName) {
-        wd.findElement(By.xpath(".//*[contains(text(), '" + unicName + "')]/../td[last()-9]")).click();
+    public void addContactToUnicGroup(int contactID, int GroupID) {
+//*[@id="content"]//*[@value='18']
+        selectContactById(contactID);
         wd.findElement(By.name("to_group")).click();
-        wd.findElement(By.xpath("//*[@id=\"content\"]/form[2]/div[4]/select//*[contains(text(), '" + unicName + "')]")).click();
-        wd.findElement(By.xpath("//*[@id=\"content\"]//div[4]/input")).click();
+        wd.findElement(By.xpath("//*[@id=\"content\"]//div[4]//*[@value='" + GroupID + "']")).click();
+        wd.findElement(By.xpath("//*[@id=\"content\"]/form[2]/div[4]/input")).click();
     }
 
-    public void deleteUnicContacFromUnicGroup(int unicNumber) {
-
+    public void deleteContacFromGroup(int contactID, int GroupID) {
         wd.findElement(By.xpath(".//*[@id=\"right\"]/select")).click();
-        wd.findElement(By.xpath(".//*[@id=\"right\"]/select//*[contains(text(), '" + unicNumber + "')]")).click();
-        wd.findElement(By.xpath(".//*[contains(text(), '" + unicNumber + "')]/../td[last()-9]")).click();
-
+        wd.findElement(By.xpath(".//*[@id=\"right\"]/select//*[@value='" + GroupID + "']")).click();
+        selectContactById(contactID);
         wd.findElement(By.name("remove")).click();
     }
 
@@ -177,6 +177,13 @@ public class ContactsHelper extends HelperBase {
         fillContactDataWithoutGroup(contact);
         initContactCreation();
     }
+
+    public ContactsData findAnyContact(Set allContacts) {
+        ContactsData contact = (ContactsData) allContacts.iterator().next();
+        return contact;
+    }
+
+
 }
 
 

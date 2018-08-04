@@ -14,13 +14,10 @@ public class ContactAddToGroupTests extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondtions() {
-        Groups groups = app.db().groups();
-        app.goTo().contactPage();
         if (app.db().contacts().size() == 0) {
-            app.contacts().create(new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
+            app.contacts().createContact(new ContactsData().withFirstName("FirstName").withMiddleName("MiddleName").
                     withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
-                    withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333").
-                    inGroup(groups.iterator().next()));
+                    withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru").withWorkPhone("333"));
         }
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
@@ -28,92 +25,44 @@ public class ContactAddToGroupTests extends TestBase {
         }
     }
 
+
     @Test
     public void addContactToGroupTests() {
+        Groups allgroups = app.db().groups();
+        Contacts allContacts = app.db().contacts();
 
-        int beforeNumberOfConnections = app.db().connectionsNumber();
-
-        ContactsData freeContact = findContactFreeContactForAdd();
-        GroupData freeGroup = findGroupForFreeContact();
-
-        findGroupForFreeContact();
-        addContactToGroup(freeContact, freeGroup);
-
-
-        int afterNumberOfConnections = app.db().connectionsNumber();
-        assertThat(afterNumberOfConnections, equalTo(beforeNumberOfConnections + 1));
-    }
-
-    private void addContactToGroup(ContactsData freeContact, GroupData freeGroup) {
-    }
-
-    private GroupData findGroupForFreeContact() {
-        return null;
-    }
-
-    private ContactsData findContactFreeContactForAdd() {
-        return null;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Test(enabled = false)
-    public void BadVetsionOFaddContactToGroupTests() {
-        int unicNumber = app.contacts().randomNumber();
-        app.goTo().groupPage();
-        app.group().create(new GroupData().withName("TestAddContactGroup-" + unicNumber));
+        ContactsData contactForAdd = app.contacts().findAnyContact(allContacts);
+        Groups beforAdditionContactToGroup = contactForAdd.getGroups();
+        checkCreateGroup(allgroups, contactForAdd);
+        GroupData emptyGroup = findGroupforContact(contactForAdd);
 
         app.goTo().contactPage();
-        app.contacts().createContact(new ContactsData().withFirstName("FirstName-" + unicNumber).withMiddleName("MiddleName").
-                withLastName("LastName").withNickname("nickname").withTitle("Title").withCompane("company").
-                withAddress("address").withMobile("111").withHomePhone("222").withEmail("E-mail@E-mail.ru"));
+        app.contacts().addContactToUnicGroup(contactForAdd.getId(), emptyGroup.getId());
 
-        int before = app.db().connectionsNumber();
-        Contacts beforeDB = app.db().contacts();
-        System.out.println("ДО" + beforeDB);
+        ContactsData updatedContact = contactForAdd.inGroup(emptyGroup);
+        Groups afterAdditionContactToGroup = updatedContact.getGroups();
 
-        app.goTo().contactPage();
-        app.contacts().addUnicContactToUnicGroup(unicNumber);
-        int after = app.db().connectionsNumber();
-        Contacts afterDB = app.db().contacts();
-        System.out.println("ПОСЛЕ" + afterDB);
-        assertThat(after, equalTo(before + 1));
+        assertThat(afterAdditionContactToGroup, equalTo(beforAdditionContactToGroup.withAdded(emptyGroup)));
+    }
+
+
+    private void checkCreateGroup(Groups allgroups, ContactsData contactForAdd) {
+        if (contactForAdd.getGroups().size() == allgroups.size()) {
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("Test1"));
+        }
+    }
+
+
+    private GroupData findGroupforContact(ContactsData contactForAdd) {
+        Groups groups = app.db().groups();
+        GroupData emptyGroup = null;
+        for (GroupData group : groups) {
+            if (!group.getContacts().contains(contactForAdd)) {
+                emptyGroup = group;
+            }
+        }
+        return emptyGroup;
     }
 
 

@@ -15,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table (name ="group_list")
 public class GroupData {
+
+
     @XStreamOmitField
     @Id
     @Column (name = "group_id")
@@ -55,7 +57,8 @@ public class GroupData {
         return new Contacts(contacts) ;
     }
 
-    @ManyToMany (mappedBy = "groups")
+
+    @ManyToMany (mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<ContactsData> contacts = new HashSet<ContactsData>();
 
     public int getId() {
