@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 public class RegistrationTests extends TestBase {
 
-    @BeforeMethod
+   // @BeforeMethod
     public void startMailServer() {
         app.mail().start();
     }
@@ -41,7 +41,7 @@ public class RegistrationTests extends TestBase {
     }
 
 
-    @AfterMethod(alwaysRun = true)
+    // @AfterMethod(alwaysRun = true)
     public void stopMailServer() {
         app.mail().stop();
     }
