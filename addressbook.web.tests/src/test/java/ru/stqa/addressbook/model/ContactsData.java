@@ -3,7 +3,6 @@ package ru.stqa.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import net.bytebuddy.agent.builder.AgentBuilder;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
