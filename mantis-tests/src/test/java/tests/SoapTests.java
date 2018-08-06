@@ -1,26 +1,35 @@
 package tests;
 
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
-import biz.futureware.mantis.rpc.soap.client.ProjectData;
 import org.testng.annotations.Test;
+import ru.stqa.pft.mantis.model.Issue;
+import ru.stqa.pft.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.Set;
 
-public class SoapTests {
+import static org.testng.Assert.assertEquals;
+
+public class SoapTests extends TestBase {
 
     @Test
     public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
-        MantisConnectPortType mc = new MantisConnectLocator().getMantisConnectPort(new URL("http://localhost/mantisbt-2.16.0/api/soap/mantisconnect.php"));
-        ProjectData[] projects = mc.mc_projects_get_user_accessible("administrator", "root1");
-        System.out.println(projects.length);
+        Set<Project> projects = app.soap().getProjects();
+        System.out.println(projects.size());
 
-        for (ProjectData project: projects){
+        for (Project project : projects) {
+
             System.out.println(project.getName());
         }
+    }
+
+    @Test
+    public void testCreateIssue() throws MalformedURLException, ServiceException, RemoteException {
+        Set<Project> projects = app.soap().getProjects();
+        Issue issue = new Issue().withSummary("Test Issue").withDescriotion("Test IssueDescription").withProject(projects.iterator().next());
+        Issue created = app.soap().addIssue(issue);
+        assertEquals(issue.getSummary(), created.getSummary());
     }
 
 }
