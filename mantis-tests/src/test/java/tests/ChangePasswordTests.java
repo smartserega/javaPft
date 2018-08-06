@@ -20,6 +20,7 @@ public class ChangePasswordTests extends TestBase {
         app.mail().start();
     }
 
+
     @Test
     public void testChangePasswordByAdmin() throws IOException, MessagingException, com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException {
         app.changePasswordHelper().adminLogin("administrator", "root1");
