@@ -30,19 +30,16 @@ public class ContactAddToGroupTests extends TestBase {
     public void addContactToGroupTests() {
         Groups allgroups = app.db().groups();
         Contacts allContacts = app.db().contacts();
-
         ContactsData contactForAdd = app.contacts().findAnyContact(allContacts);
-        Groups beforAdditionContactToGroup = contactForAdd.getGroups();
+        Groups beforeAdditionContactToGroup = contactForAdd.getGroups();
         checkCreateGroup(allgroups, contactForAdd);
         GroupData emptyGroup = findGroupforContact(contactForAdd);
 
         app.goTo().contactPage();
         app.contacts().addContactToUnicGroup(contactForAdd.getId(), emptyGroup.getId());
 
-        ContactsData updatedContact = contactForAdd.inGroup(emptyGroup);
-        Groups afterAdditionContactToGroup = updatedContact.getGroups();
-
-        assertThat(afterAdditionContactToGroup, equalTo(beforAdditionContactToGroup.withAdded(emptyGroup)));
+        Groups afterAdditionContactToGroup = contactForAdd.getGroups();
+        assertThat(afterAdditionContactToGroup.withOutAdded(emptyGroup), equalTo(beforeAdditionContactToGroup));
     }
 
 

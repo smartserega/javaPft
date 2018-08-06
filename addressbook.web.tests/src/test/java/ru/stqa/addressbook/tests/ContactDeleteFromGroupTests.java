@@ -37,17 +37,13 @@ public class ContactDeleteFromGroupTests extends TestBase {
         Groups allgroups = app.db().groups();
         checkNotEmptyGroupPresent(allgroups, contactForDelete);
         GroupData notEmptyGroup = findGroupforDeleteContact(contactForDelete);
-
-        ContactsData updatedContact1 = contactForDelete.inGroup(notEmptyGroup);
-        Groups beforDeletionContactFromGroup = updatedContact1.getGroups();
+        Groups beforeDeletionContactFromGroup = contactForDelete.getGroups();
 
         app.goTo().contactPage();
         app.contacts().deleteContacFromGroup(contactForDelete.getId(), notEmptyGroup.getId());
 
-        ContactsData updatedContact = contactForDelete.inGroup(notEmptyGroup);
-        Groups afterDelitionContactToGroup = updatedContact.getGroups();
-
-        assertThat(afterDelitionContactToGroup, equalTo(beforDeletionContactFromGroup.withAdded(notEmptyGroup)));
+        Groups afterDelitionContactToGroup = contactForDelete.getGroups();
+        assertThat(afterDelitionContactToGroup.withOutAdded(notEmptyGroup), equalTo(beforeDeletionContactFromGroup));
     }
 
     private GroupData findGroupforDeleteContact(ContactsData contactForAdd) {
