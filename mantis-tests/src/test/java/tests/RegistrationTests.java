@@ -22,11 +22,11 @@ public class RegistrationTests extends TestBase {
     public void testReRegistration() throws IOException, MessagingException, javax.mail.MessagingException {
         long now = System.currentTimeMillis();
         String email = String.format("user@localhost%s.localdomain", now);
-        String user = String.format("user%s" , now);
-        String password = ("password");
+        String user = String.format("user%s", now);
+        String password = ( "password" );
 //        app.james().createUser(user, password);
         app.registration().start(user, email);
-        List<MailMessage> mailMessages = app.mail().waitForMail(2, 40000);
+        List<MailMessage> mailMessages = app.mail().waitForMail(2, 18000);
 //        List<MailMessage> mailMessages = app.james().waitForMail(user, password, 10000);
         String confrimationLink = findConfrimationLink(mailMessages, email);
         app.registration().finish(confrimationLink, password);
@@ -41,7 +41,7 @@ public class RegistrationTests extends TestBase {
     }
 
 
-     @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void stopMailServer() {
         app.mail().stop();
     }
