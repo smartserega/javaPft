@@ -37,27 +37,32 @@ public class ContactDeleteFromGroupTests extends TestBase {
         Groups allgroups = app.db().groups();
         checkNotEmptyGroupPresent(allgroups, contactForDelete);
         GroupData notEmptyGroup = findGroupforDeleteContact(contactForDelete);
-        Groups beforeDeletionContactFromGroup = contactForDelete.getGroups();
+
+        Contacts allContactsBeforeDelete = app.db().contacts();
+        ContactsData updatedContactBefore = findUpdatedContact(allContactsBeforeDelete, contactForDelete);
+        Groups beforeDeletionContactFromGroup = updatedContactBefore.getGroups();
+
 
         app.goTo().contactPage();
         app.contacts().deleteContacFromGroup(contactForDelete.getId(), notEmptyGroup.getId());
 
-        findUpdatedContact(contactForDelete).getGroups();
+        Contacts allContactsAfterDelete = app.db().contacts();
+        ContactsData updatedContactAfter = findUpdatedContact(allContactsAfterDelete, contactForDelete);
+        Groups afterDeletionContactToGroup = updatedContactAfter.getGroups();
 
-        Groups afterDelitionContactToGroup = findUpdatedContact(contactForDelete).getGroups();
-        assertThat(afterDelitionContactToGroup.withOutAdded(notEmptyGroup), equalTo(beforeDeletionContactFromGroup));
+        assertThat(afterDeletionContactToGroup.withAdded(notEmptyGroup), equalTo(beforeDeletionContactFromGroup));
     }
 
 
-    private ContactsData findUpdatedContact(ContactsData contactForDelete) {
-        Contacts contacts = app.db().contacts();
-        int i = contactForDelete.getId();
-        for (ContactsData contact: contacts){
-            if (contact.getId() == i) {
-                return contact;
+    private ContactsData findUpdatedContact(Contacts allContacts, ContactsData contactForDelete) {
+        ContactsData updatedContact = null;
+        for (ContactsData contact : allContacts) {
+            updatedContact = null;
+            if (contact.equals(contactForDelete)) {
+                updatedContact = contact;
             }
         }
-        return (ContactsData) contacts;
+        return updatedContact;
     }
 
 
