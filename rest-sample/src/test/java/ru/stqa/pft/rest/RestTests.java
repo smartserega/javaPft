@@ -1,5 +1,6 @@
 package ru.stqa.pft.rest;
 
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -28,7 +29,7 @@ public class RestTests {
 
 
     private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json")).returnContent().asString();
+        String json = getExecutor().execute(Request.Get("http://bugify.stqa.ru/api/issues.json?limit=1000")).returnContent().asString();
         System.out.println(json);
 
         JsonElement parsed = new JsonParser().parse(json);
@@ -43,7 +44,7 @@ public class RestTests {
     }
 
     private int createIssue(Issue newIssue) throws IOException {
-        String json = getExecutor().execute(Request.Post("http://bugify.stqa.ru/api/issues.json")
+        String json = getExecutor().execute(Request.Post("http://bugify.stqa.ru/api/issues.json?limit=1000")
                 .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
                         new BasicNameValuePair("description", newIssue.getDescription())))
                 .returnContent().asString();
