@@ -42,9 +42,24 @@ public class ContactDeleteFromGroupTests extends TestBase {
         app.goTo().contactPage();
         app.contacts().deleteContacFromGroup(contactForDelete.getId(), notEmptyGroup.getId());
 
-        Groups afterDelitionContactToGroup = contactForDelete.getGroups();
+        findUpdatedContact(contactForDelete).getGroups();
+
+        Groups afterDelitionContactToGroup = findUpdatedContact(contactForDelete).getGroups();
         assertThat(afterDelitionContactToGroup.withOutAdded(notEmptyGroup), equalTo(beforeDeletionContactFromGroup));
     }
+
+
+    private ContactsData findUpdatedContact(ContactsData contactForDelete) {
+        Contacts contacts = app.db().contacts();
+        int i = contactForDelete.getId();
+        for (ContactsData contact: contacts){
+            if (contact.getId() == i) {
+                return contact;
+            }
+        }
+        return (ContactsData) contacts;
+    }
+
 
     private GroupData findGroupforDeleteContact(ContactsData contactForAdd) {
         Groups groups = app.db().groups();

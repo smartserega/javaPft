@@ -38,8 +38,21 @@ public class ContactAddToGroupTests extends TestBase {
         app.goTo().contactPage();
         app.contacts().addContactToUnicGroup(contactForAdd.getId(), emptyGroup.getId());
 
-        Groups afterAdditionContactToGroup = contactForAdd.getGroups();
+        findUpdatedContact(contactForAdd);
+        
+        Groups afterAdditionContactToGroup =  findUpdatedContact(contactForAdd).getGroups();
         assertThat(afterAdditionContactToGroup.withOutAdded(emptyGroup), equalTo(beforeAdditionContactToGroup));
+    }
+
+    private ContactsData findUpdatedContact(ContactsData contactForAdd) {
+        Contacts contacts = app.db().contacts();
+        int i = contactForAdd.getId();
+        for (ContactsData contact: contacts){
+            if (contact.getId() == i) {
+                return contact;
+            }
+        }
+        return (ContactsData) contacts;
     }
 
 
