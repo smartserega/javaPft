@@ -47,8 +47,8 @@ public class TestBase {
         IssueData issue = mc.mc_issue_get("administrator", "root1", BigInteger.valueOf(issueId));
         String issueStatus = issue.getStatus().getName();
         if (issueStatus.equals("resolved")) {
-            return true;
-        } else return false;
+            return false;
+        } else return true;
 
     }
 }
