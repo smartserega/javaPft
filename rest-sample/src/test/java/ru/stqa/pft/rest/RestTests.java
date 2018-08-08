@@ -19,7 +19,7 @@ public class RestTests extends TestBase {
 
     @Test
     public void testState() throws IOException {
-        int isueID = 2;
+        int isueID = 1;
         skipIfNotFixed(isueID);
     }
 

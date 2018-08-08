@@ -18,10 +18,8 @@ public class TestBase {
         System.out.println(parsedObject);
         String issueStatus = parsedObject.get("issues").getAsJsonArray().get(0).getAsJsonObject().get("state_name").toString();
         System.out.println("IssueStatus = " + issueStatus);
-        if (issueStatus.equals("Resolved")) {
-            return false;
-        } else return true;
-
+        if (issueStatus.equals("Resolved")) return true;
+        else return false;
     }
 
 
