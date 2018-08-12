@@ -52,7 +52,7 @@ public class ApplicationManager {
             DesiredCapabilities capabilites = new DesiredCapabilities();
             capabilites.setBrowserName(browser);
             wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
-        }g
+        }
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
