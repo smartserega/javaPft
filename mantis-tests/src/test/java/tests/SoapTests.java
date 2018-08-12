@@ -1,10 +1,10 @@
 package tests;
 
+import com.google.protobuf.ServiceException;
 import org.testng.annotations.Test;
 import ru.stqa.pft.rest.mantis.model.Issue;
 import ru.stqa.pft.rest.mantis.model.Project;
 
-import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
