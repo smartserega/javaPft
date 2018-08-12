@@ -6,10 +6,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -36,14 +39,20 @@ public class ApplicationManager {
 
 
     public void init() throws IOException {
-        dbHelper = new DbHelper();
-        if (browser.equals(BrowserType.FIREFOX)) {
-            wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
-        } else if (browser.equals(BrowserType.CHROME)) {
-            wd = new ChromeDriver();
-        } else if (browser.equals(IE)) {
-            wd = new InternetExplorerDriver();
-        }
+        if("".equals(properties.getProperty("selenium.server"))) {
+            dbHelper = new DbHelper();
+            if (browser.equals(BrowserType.FIREFOX)) {
+                wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
+            } else if (browser.equals(BrowserType.CHROME)) {
+                wd = new ChromeDriver();
+            } else if (browser.equals(IE)) {
+                wd = new InternetExplorerDriver();
+            }
+        } else {
+            DesiredCapabilities capabilites = new DesiredCapabilities();
+            capabilites.setBrowserName(browser);
+            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilites);
+        }g
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
